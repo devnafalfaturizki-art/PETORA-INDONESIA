@@ -39,6 +39,7 @@ Dokumen ini adalah satu-satunya acuan blueprint PETORA. Kata **WAJIB**, **DILARA
 | `PETORA-FINAL-024` | Formula dan Kalkulasi Domain              | Harga, pajak, promo, costing, loyalty, komisi, layanan           |
 | `PETORA-FINAL-025` | Model Otorisasi dan RLS                   | Permission code, cabang, klasifikasi tabel, policy, storage      |
 | `PETORA-FINAL-026` | Runbook Deployment Produksi               | Hosting, migrasi, rollout, rollback, secrets, smoke test         |
+| `PETORA-FINAL-027` | Kontrak Modul, Fungsi, dan Workflow       | Aktor, fungsi, transisi, integrasi, validasi, acceptance         |
 
 ---
 
@@ -1391,15 +1392,17 @@ Bagian ini adalah kontrak otorisasi yang harus diterjemahkan menjadi policy Post
 
 Permission berikut di-seed dalam tabel `permissions`; nama action tidak boleh dibuat bebas dari panel. `read_sensitive` dipisahkan dari `read` untuk PII/medis/HR. `approve`, `post`, `export`, dan `admin` adalah hak berbeda.
 
-| Domain                     | Permission code minimum                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Organisasi/identitas       | `org:organization:read`, `org:organization:update`, `org:branch:read`, `org:branch:create`, `org:branch:update`, `identity:user:read`, `identity:user:invite`, `identity:user:disable`, `identity:user:role_assign`, `identity:session:revoke`, `identity:role:manage`                                                                                                                                                                                          |
-| Config/security            | `settings:config:read`, `settings:config:update`, `settings:config:approve`, `settings:integration:read`, `settings:integration:update`, `settings:integration:test`, `settings:integration:rotate`, `audit:log:read`, `audit:log:export`, `system:health:read`, `system:job:retry`                                                                                                                                                                             |
-| Customer/pet               | `customer:customer:read`, `customer:customer:read_sensitive`, `customer:customer:create`, `customer:customer:update`, `customer:customer:merge`, `customer:customer:export`, `pet:pet:read`, `pet:pet:create`, `pet:pet:update`, `customer:consent:manage`                                                                                                                                                                                                      |
-| Catalog/inventory/purchase | `catalog:product:read`, `catalog:product:manage`, `catalog:price:approve`, `inventory:stock:read`, `inventory:stock:adjust`, `inventory:count:create`, `inventory:count:approve`, `inventory:transfer:create`, `inventory:transfer:receive`, `purchase:order:create`, `purchase:order:approve`, `purchase:receipt:create`, `purchase:bill:read`, `purchase:payment:post`                                                                                        |
-| POS/service                | `pos:transaction:read`, `pos:transaction:create`, `pos:transaction:void`, `pos:refund:create`, `pos:refund:approve`, `pos:shift:open`, `pos:shift:close`, `pos:shift:reconcile`, `booking:booking:read`, `booking:booking:create`, `booking:booking:transition`, `service:session:manage`, `boarding:stay:manage`                                                                                                                                               |
-| Klinik/farmasi             | `vet:queue:read`, `vet:medical_record:read`, `vet:medical_record:read_sensitive`, `vet:medical_record:create`, `vet:medical_record:finalize`, `vet:medical_record:amend`, `vet:medical_record:share`, `vet:lab:manage`, `vet:surgery:manage`, `pharmacy:prescription:read`, `pharmacy:dispense`, `pharmacy:controlled:manage`                                                                                                                                   |
-| SDM/finance/report         | `hr:employee:read`, `hr:employee:sensitive_read`, `hr:attendance:manage`, `hr:payroll:read`, `hr:payroll:calculate`, `hr:payroll:approve`, `hr:payroll:pay`, `finance:account:read`, `finance:journal:create`, `finance:journal:post`, `finance:journal:reverse`, `finance:cash:manage`, `finance:payable:manage`, `finance:receivable:manage`, `finance:tax:manage`, `report:operational:read`, `report:finance:read`, `report:clinical:read`, `report:export` |
+| Domain                       | Permission code minimum                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Organisasi/identitas         | `org:organization:read`, `org:organization:update`, `org:branch:read`, `org:branch:create`, `org:branch:update`, `identity:user:read`, `identity:user:invite`, `identity:user:disable`, `identity:user:role_assign`, `identity:session:revoke`, `identity:role:manage`                                                                                                                                                                                                                                                                                    |
+| Config/security              | `settings:config:read`, `settings:config:update`, `settings:config:approve`, `settings:integration:read`, `settings:integration:update`, `settings:integration:test`, `settings:integration:rotate`, `audit:log:read`, `audit:log:export`, `system:health:read`, `system:job:retry`                                                                                                                                                                                                                                                                       |
+| Customer/pet                 | `customer:customer:read`, `customer:customer:read_sensitive`, `customer:customer:create`, `customer:customer:update`, `customer:customer:merge`, `customer:customer:export`, `pet:pet:read`, `pet:pet:create`, `pet:pet:update`, `customer:consent:manage`                                                                                                                                                                                                                                                                                                |
+| Catalog/inventory/purchase   | `catalog:product:read`, `catalog:product:manage`, `catalog:price:approve`, `inventory:stock:read`, `inventory:stock:adjust`, `inventory:count:create`, `inventory:count:approve`, `inventory:transfer:create`, `inventory:transfer:receive`, `purchase:order:create`, `purchase:order:approve`, `purchase:receipt:create`, `purchase:bill:read`, `purchase:payment:post`                                                                                                                                                                                  |
+| POS/service                  | `pos:transaction:read`, `pos:transaction:create`, `pos:transaction:void`, `pos:refund:create`, `pos:refund:approve`, `pos:shift:open`, `pos:shift:close`, `pos:shift:reconcile`, `booking:booking:read`, `booking:booking:create`, `booking:booking:transition`, `service:session:manage`, `boarding:stay:manage`                                                                                                                                                                                                                                         |
+| Klinik/farmasi               | `vet:queue:read`, `vet:medical_record:read`, `vet:medical_record:read_sensitive`, `vet:medical_record:create`, `vet:medical_record:finalize`, `vet:medical_record:amend`, `vet:medical_record:share`, `vet:lab:manage`, `vet:surgery:manage`, `pharmacy:prescription:read`, `pharmacy:dispense`, `pharmacy:controlled:manage`                                                                                                                                                                                                                             |
+| SDM/finance/report           | `hr:employee:read`, `hr:employee:sensitive_read`, `hr:attendance:manage`, `hr:payroll:read`, `hr:payroll:calculate`, `hr:payroll:approve`, `hr:payroll:pay`, `finance:account:read`, `finance:journal:create`, `finance:journal:post`, `finance:journal:reverse`, `finance:cash:manage`, `finance:payable:manage`, `finance:receivable:manage`, `finance:tax:manage`, `report:operational:read`, `report:finance:read`, `report:clinical:read`, `report:export`                                                                                           |
+| Membership/marketing         | `membership:tier:read`, `membership:tier:manage`, `loyalty:ledger:read`, `loyalty:redeem`, `loyalty:adjust`, `promotion:rule:read`, `promotion:rule:manage`, `promotion:rule:approve`, `promotion:voucher:issue`, `promotion:voucher:redeem`, `promotion:campaign:manage`, `promotion:campaign:send`                                                                                                                                                                                                                                                      |
+| Operasional/dokumen/delivery | `operations:asset:read`, `operations:asset:manage`, `operations:checklist:template_manage`, `operations:checklist:execute`, `operations:expense:create`, `operations:expense:approve`, `budget:plan:read`, `budget:plan:manage`, `budget:plan:approve`, `document:document:read`, `document:document:upload`, `document:document:share`, `document:document:archive`, `delivery:order:read`, `delivery:order:manage`, `delivery:order:dispatch`, `delivery:order:complete`, `ecommerce:catalog:manage`, `ecommerce:order:read`, `ecommerce:order:fulfill` |
 
 Role template hanya mengikat kumpulan kode di registry; permission baru memerlukan migration dan review. Maker-checker wajib untuk refund threshold, PO approval, adjustment material, payroll approval, jurnal manual, config high-risk, dan perubahan role/admin. Pemrakarsa tidak dapat menyetujui objeknya sendiri untuk tindakan tersebut.
 
@@ -1508,3 +1511,164 @@ Release dianggap selesai setelah: migration version cocok, semua app asset beras
 Pembukaan cabang: cek jadwal/holiday, kasir/register, opening cash, printer/barcode, konektivitas, stok minimum dan queue integrasi. Penutupan: close seluruh shift, rekonsiliasi cash variance, transaksi/payment pending, booking/stay aktif, stock receiving/transit, pending approval dan outbox. System health menampilkan cabang terdampak dan owner follow-up.
 
 Operator tidak mengedit saldo, jurnal, status final, permission, atau config langsung di SQL/dashboard. Tindakan pemulihan dilakukan melalui UI/RPC administratif yang tercatat atau change procedure yang disetujui dan disertai reconciliation setelahnya.
+
+---
+
+## PETORA-FINAL-027 - Kontrak Modul, Fungsi, dan Workflow
+
+Bagian ini menetapkan kontrak operasional seragam bagi seluruh modul. Setiap fungsi mutasi mengikuti API/RPC pada `PETORA-FINAL-005`; setiap rule angka mengikuti `PETORA-FINAL-024`; setiap akses mengikuti permission dan RLS `PETORA-FINAL-025`. UI tidak menulis status atau saldo langsung.
+
+### 027.1 Template wajib untuk implementasi modul
+
+Shorthand seperti `inventory:*` pada uraian modul berarti permission terdaftar dalam keluarga tersebut, bukan wildcard permission yang disimpan di database. Setiap module feature wajib mendefinisikan: owner, actor/permission, query dan command, input/output, state transition, precondition, transaction boundary, event/outbox, failure/retry behavior, audit fields, dan acceptance tests. “CRUD” tidak cukup sebagai spesifikasi fungsi: operasi yang final/approved/post harus menggunakan command bernama dan transisi legal. Semua list memakai branch/filter scope, pagination, sorting allowlist, empty/loading/error/forbidden states.
+
+Konvensi command: `create` membuat draft/intent; `submit` mengunci draft dan memulai approval; `approve/reject` mencatat actor terpisah; `post/complete/finalize` membukukan efek immutable; `cancel/void` hanya pada status yang diizinkan; `reverse/amend` membuat fakta koreksi baru. Setiap command mengirim `expected_version`, `Idempotency-Key` untuk operasi retryable, dan reason saat menolak/mengoreksi.
+
+### 027.2 `MOD-PET-ORG-001` - Organisasi, cabang, identitas, dashboard
+
+**Actor/permission:** owner dan super admin untuk setup; `org:*`, `identity:user:*`, `identity:role:manage`; branch manager hanya cabangnya. MFA wajib untuk admin.
+
+**Fungsi/layar:** setup organisasi; branch list/detail/jam operasional/hari libur; register dan warehouse setup; user invitation/resend/revoke; user status/session revoke; role/permission assignment; dashboard per cabang/periode. Form edit tidak menampilkan service-role atau provider secrets.
+
+**Workflow:** create branch draft -> validasi code/timezone/address -> aktifkan branch -> buat default warehouse/register -> assign manager -> configure operating hours. User: invite -> invited -> email verified/credential setup -> active -> disabled/revoke sessions. Cabang tidak dapat deactivate jika memiliki shift, stay, booking, transfer atau approval aktif.
+
+**Integrasi/aturan:** branch timezone menjadi sumber tampilan dan `business_date`; perubahan timezone berlaku untuk event baru. Role change berlaku setelah commit dan mencabut cache/session permission berikutnya. Dashboard hanya memakai read model; setiap KPI mempunyai definisi 023.7 dan timestamp `as_of`.
+
+**Acceptance:** user disabled tidak dapat login atau memanggil function; user branch A gagal query/write branch B; cabang tidak bisa ditutup selama ada stay/transaksi aktif; perubahan role/config tercatat sebelum/after dan actor.
+
+### 027.3 `MOD-PET-CUSTOMER-001` - Customer, pet, consent, CRM, keluhan
+
+**Actor/permission:** customer service/front desk dan role customer sesuai `customer:*`, `pet:*`, `customer:consent:manage`; akses medical detail memerlukan permission klinis terpisah.
+
+**Fungsi/layar:** cari berdasarkan nomor/nama/kontak normalized; create/edit profile; create pet; owner/caretaker link; vaksin/berat; tag/segment; history timeline; merge duplikat; consent center; campaign preview/send; complaint ticket, assignee, SLA, komunikasi dan resolution.
+
+**Workflow:** create customer -> normalize contact -> exact duplicate check -> verify contact/identity -> create/link pet -> consent event -> aktivitas/transaksi. Merge: lock source+target -> preview relasi dan konflik -> approval -> reparent relasi yang legal -> mark source merged -> audit; tidak menggabungkan ledger ke saldo baru tanpa reversal/rebuild. Complaint: open -> triaged -> assigned -> investigating -> waiting_customer/resolved -> closed/reopened; setiap status memiliki owner dan timestamp.
+
+**Validasi/efek:** contact tidak unik secara global bila keluarga berbagi nomor; duplicate handling menampilkan kandidat dan meminta operator memilih, bukan auto-merge. Owner aktif minimal satu; hanya primary satu pada satu waktu. Consent withdrawal langsung suppress campaign queue; queued message yang belum terkirim dibatalkan. Segmentasi tidak memasukkan data klinis/PII tanpa permission.
+
+**Acceptance:** customer portal tidak dapat mengganti `customer_id`; merge tidak mengubah referensi penjualan/medical; consent withdrawn mencegah scheduled broadcast; pet dengan lebih dari satu owner tetap memiliki riwayat/izin yang benar.
+
+### 027.4 `MOD-PET-INVENTORY-001` - Katalog, purchasing, inventory, supplier
+
+**Actor/permission:** product admin, inventory staff, purchasing staff, branch manager/approver; permission `catalog:*`, `inventory:*`, `purchase:*` dari 025.3.
+
+**Fungsi/layar:** product/category/unit/brand; harga efektif per branch; supplier; stock by warehouse/lot; reorder alerts; purchase request/PO; receipt/quality inspection; vendor bill/match; transfer; count/opname; adjustment request/approval; consignment settlement.
+
+**Workflow pembelian:** draft PO -> submit -> approval berdasar nilai/variance -> ordered -> receive one/more shipments -> quality accepted/rejected -> post receipt -> match invoice -> approve bill -> allocate payment -> close. Draft receipt tidak memengaruhi stok. Short-close memerlukan reason dan approval. Supplier return merujuk receipt/lot awal dan membuat outbound movement.
+
+**Workflow stok:** reservation create/expire/release -> sale/dispense commit -> append movement + update projection; transfer draft -> approved -> dispatch to transit -> receive target -> discrepancy resolution -> close. Count draft snapshot -> count lines -> freeze/capture intervening movements -> review variance -> approve -> post adjustment -> reconcile count.
+
+**Validasi/efek:** harga dan unit conversion effective-dated; tracked batch/expiry wajib saat receipt; FEFO dan quality status diterapkan saat outbound. Ubah SKU/barcode yang dipakai historis harus mempertahankan alias. Transfer cabang beda memerlukan scope kedua cabang atau approval terpusat. Reorder suggestion tidak membuat PO otomatis tanpa setting/approval eksplisit.
+
+**Acceptance:** receipt retry tidak menambah stok ganda; concurrent sales tidak oversell; expired/quarantine ditolak; transfer partial tetap menunjukkan transit; stock balance cocok dengan jumlah ledger pada rekonsiliasi.
+
+### 027.5 `MOD-PET-SALES-001` - POS, shift, pembayaran, refund
+
+**Actor/permission:** cashier/register scope; manager untuk override/approval; finance untuk settlement; permission `pos:transaction:*`, `pos:shift:*`, `pos:refund:*`.
+
+**Fungsi/layar:** open/close shift; scan/search/add/remove item; customer/pet lookup; quote/price recalculation; promo/redeem; cash/split/gateway tender; hold draft; transaction history; receipt/reprint; void draft; refund/return; payment reconciliation.
+
+**Workflow:** open shift -> draft cart -> get server quote/config version -> customer confirms -> create payment intent or cash tender -> atomic commit/internal settlement -> receipt/outbox -> close shift/count/reconcile. Gateway checkout selalu `pending` sampai signature-verified callback/update; timeout memakai idempotency key lama. Refund mencatat original sale/item, sisa refundable qty, kondisi barang, restock disposition, approval, payment state dan reversal journal.
+
+**Validasi/efek:** server menghitung semua amount; kasir tidak dapat ubah harga, tax atau paid status. Split tender sukses harus menutup total; change hanya cash. Print failure tidak mengubah sale. Refund memecah amount/tax/discount dari snapshot asli; inventory return hanya setelah penerimaan fisik. Maker-checker pada threshold dan self-approval ditolak.
+
+**Acceptance:** timeout setelah commit menampilkan transaksi yang sama; gateway webhook duplicate/out-of-order tidak menggandakan pembayaran; refund melebihi saldo refundable ditolak; tutup shift menyimpan variance tanpa mengubah transaksi.
+
+### 027.6 `MOD-PET-SERVICE-001` - Service catalog, booking, grooming, boarding, transport
+
+**Actor/permission:** front desk, customer portal, groomer, boarding staff, branch manager; `booking:*`, `service:session:manage`, `boarding:stay:manage`.
+
+**Fungsi/layar:** availability/slot search; booking create/confirm/reschedule/cancel; deposit; waitlist; calendar/queue; check-in/intake; service session/checklists/photos; pet care log; room occupancy/cleaning; checkout bill preview; driver dispatch/POD.
+
+**Workflow booking:** request -> quote -> reservation/resource lock -> confirm -> reminder -> check-in -> in-progress -> completed -> invoice/payment. Reschedule atomik melepas slot lama dan mengunci yang baru; jika gagal, slot lama tetap. Cancellation/no-show menghitung deposit/fee dari policy snapshot. Service completion menghasilkan billing draft, bukan revenue sampai sales payment.
+
+**Workflow grooming:** intake notes/photos -> health/behavior warning -> service consent -> groomer assigned/start -> checklist/progress/add-on consent -> finish/photo -> supervisor handover -> invoice. Boarding: reserve room -> check-in condition/care plan -> time-stamped care logs/incident -> checkout bill -> payment/deposit reconcile -> cleaning -> release room. Transport: dispatch -> pickup -> in_transit -> delivered/POD atau failed_return.
+
+**Validasi/efek:** ketersediaan dihitung pada timezone cabang, jam operasional, resource, durasi+buffer dan kapasitas. Konflik concurrent ditolak atomik. Care log obat harus merujuk instruction/authorization; insiden dibuat ticket dan alert owner sesuai consent/channel. Additional service memerlukan price approval sebelum pelaksanaan kecuali emergency note.
+
+**Acceptance:** overlapping booking tidak oversubscribe resource; reschedule race mempertahankan booking lama; boarding checkout memakai billable rule snapshot; kamar tidak `available` sebelum cleaning pass; transport delivered harus punya actor/time/POD policy.
+
+### 027.7 `MOD-PET-CLINIC-001` - Klinik, medical record, lab, surgery, pharmacy
+
+**Actor/permission:** vet, triage/front desk terbatas, pharmacist, lab staff; `vet:*`, `pharmacy:*` dan branch clinical scope. Super admin tidak otomatis membaca rekam medis.
+
+**Fungsi/layar:** triage/queue; encounter draft; history/allergies/vitals; diagnosis/procedure; consent; prescription; lab order/result/verification; surgery checklist; hospitalization/care chart; medical finalize/amend; pharmacy dispense/label; customer share authorization.
+
+**Workflow:** arrival -> identity/pet link -> triage severity -> queue assignment -> encounter draft -> exam/diagnosis/treatment -> orders/consent -> finalization -> dispense/lab/surgery/hospitalization as applicable -> billing -> discharge/follow-up. Finalize membutuhkan veterinarian actor dan expected version. Amendment menjadi record terpisah bertanda tangan; tidak menghapus teks asli. Lab: ordered -> sample_collected -> processing -> result_draft -> verified -> released_to_record. Surgery: planned -> consented -> preop_checked -> in_progress -> recovery -> discharged/cancelled.
+
+**Validasi/efek:** allergies/medication warnings ditampilkan sebelum resep dan dispense; acknowledgment berisi user/time. Rx qty tidak dapat melebihi prescribed minus dispensed/refill allowance. Lot FEFO/expiry dan permission controlled drug dicek atomik. File medical private; share-to-customer merupakan explicit action per document/result. Kasir hanya menerima item/service billing snapshot, bukan medical notes.
+
+**Acceptance:** staff nonclinical tidak membaca medical payload; vet finalisasi stale version mendapat conflict; pharmacist tidak dapat mengubah diagnosis; dispense parsial menjaga remaining qty; patient portal hanya melihat bagian shared.
+
+### 027.8 `MOD-PET-LOYALTY-001` - Membership, loyalty, promotion, campaign
+
+**Actor/permission:** marketing/customer service untuk campaign/tier; cashier redeem sesuai batas; owner approve perubahan rule; `membership:*`, `loyalty:*`, `promotion:*`, `customer:consent:manage`.
+
+**Fungsi/layar:** tier/benefit effective dates; customer enrollment/status; ledger/poin expiry; promotion rule builder berbasis schema; voucher issue/redeem; campaign audience preview/test-send/schedule/suppress; redemption/reversal history.
+
+**Workflow:** configure draft rule -> validate/date/branch/stacking -> approve -> activate -> quote engine evaluates -> transaction commit reserves/redeems usage -> ledger earning/redeem -> scheduled expiry/reversal. Campaign: audience build -> exclude nonconsented/suppressed -> estimate recipients/cost -> test -> approve/schedule -> rate-limited dispatch -> delivery/opt-out tracking.
+
+**Validasi/efek:** rule version immutable setelah dipakai; update membuat version baru. Kuota/voucher lock dalam transaksi. Earn/redeem/refund mengikuti formula 024.4. Campaign mengecek consent kembali saat send, tidak hanya saat audience dibuat; frequency cap per kontak/channel berlaku.
+
+**Acceptance:** dua request bersamaan tidak melebihi kuota voucher; refund mencatat reversal poin tepat; consent yang dicabut setelah schedule menghentikan pesan; promo ditolak dengan reason code deterministik.
+
+### 027.9 `MOD-PET-HR-001` - Karyawan, jadwal, absensi, komisi, payroll
+
+**Actor/permission:** HR staff, employee self-service, manager approver, finance payroll approver; `hr:employee:*`, `hr:attendance:*`, `hr:payroll:*`.
+
+**Fungsi/layar:** employee directory/private profile; branch assignment; contract/document expiry; schedules/shift swap/leave; raw attendance and correction; commission rule/entries; payroll period/run/exception review; approval/payment/slip; exports.
+
+**Workflow:** employee invited/active/on_leave/terminated -> schedule published -> clock event by server -> correction request/review -> commission source finalized -> payroll period cutoff -> calculate immutable input version -> exception resolution -> maker review -> independent approve -> payment batch -> payslip -> close. Reopen requires elevated permission, reason, new version and downstream accounting adjustment.
+
+**Validasi/efek:** employee cannot edit server time or approved attendance; one active assignment/period policy is enforced. Salary, bank, national IDs and payslip require sensitive permission and field masking. Commission uses line snapshot and refund adjustments. Statutory formula version must be explicit; if unconfigured, payroll cannot be marked compliant/paid as final.
+
+**Acceptance:** duplicate payroll final for same employee/period rejected; preparer cannot self-approve; terminated user sessions revoked but history retained; closed payroll unaffected by later attendance edits.
+
+### 027.10 `MOD-PET-FINANCE-001` - Kas, piutang, utang, accounting, tax, reports
+
+**Actor/permission:** finance staff, branch manager for expense approval, owner for period close; `finance:*`, `report:finance:*`.
+
+**Fungsi/layar:** COA and mapping; accounting periods; source journal queue; manual journal; post/reversal; cash/bank accounts; expense submit/approve/pay; AR/AP invoice, allocation, aging; bank statement import/match; tax configuration/reports; close period; financial statements.
+
+**Workflow:** operational source commits -> event/source journal posted atomically or visible in exception queue -> finance reconciles clearing/AR/AP -> reviews exception -> approves/manual posts -> bank/payment match -> period checklist -> close. Period close checks unposted source events, out-of-balance journals, unresolved settlement, AP/AR reconciliation and report totals. Reopen requires owner/finance dual approval and audit.
+
+**Validasi/efek:** journal double-entry and source uniqueness; no backdate to closed period; customer credit respects limit/due date; supplier payment allocation <= open payable; bank statement import dedupes external line ID. Tax reports use tax snapshot/effective date, not current product rate. Financial report endpoints are read-only and use consistent cutoff.
+
+**Acceptance:** post fails without partial journal when mapping absent; debit/credit totals reconcile; reversal balances and references source; AR/AP aging agrees with open item ledger; a closed period rejects direct REST/RPC posting.
+
+### 027.11 `MOD-PET-OPS-001` - Aset, SOP, dokumen, pengeluaran, budget, delivery, online order
+
+**Actor/permission:** operations staff, asset custodian, approver, dispatcher, online customer; `operations:*`, `document:*`, `budget:*`, `delivery:*`.
+
+**Fungsi/layar:** asset register/depreciation/maintenance; checklist template/version/execution; private document categories/version/expiry; expense and budget request; delivery dispatch/tracking/POD; online catalog/order/fulfillment/refund.
+
+**Workflow:** asset acquire -> assign/location -> maintenance -> disposal/journal; SOP draft -> publish version -> scheduled run -> execute evidence -> reviewer close; document upload -> scan/metadata/permission -> version/expiry reminders -> retention/archive; expense/budget request -> approve -> pay/post -> actual; online order -> reserve stock TTL -> payment verified -> pick/pack -> dispatch -> POD -> close, or cancel/expire/release reservation.
+
+**Validasi/efek:** checklist must use published template version; document path is never public by default; expired legal/asset document alerts owner. Online item stock uses same inventory balance/reservation as POS. Shipment cancellation releases reservation only if not dispatched; returns enter return/inspection flow before stock available. Budget actual derives from posted journals.
+
+**Acceptance:** public user cannot access private document path; order expiration releases stock once; delivery status cannot skip required scan/POD; SOP edit does not alter completed checklist; asset disposal posts approved accounting entry when enabled.
+
+### 027.12 `MOD-PET-ADMIN-001` - Super Admin, config, integrations, jobs, audit
+
+**Actor/permission:** super admin with MFA; config approver/secret owner as separate duties; `settings:*`, `system:*`, `audit:*`.
+
+**Fungsi/layar:** effective config by environment/org/branch; config schema/history/diff/rollback; provider adapter setup/test/rotate/disable; outbox/job health/retry; audit search/export; system health/capacity; feature availability and maintenance banner.
+
+**Workflow:** read registry -> validate requested key/scope/risk -> check permission/expected version -> show effective-value impact -> approval if high-risk -> commit new config version/audit -> invalidate server cache -> workers pick version -> observe/test -> rollback by writing a new version. Integration secret path is write-only; successful test precedes enable. Retry dead-letter requires actor, reason and idempotency.
+
+**Validasi/efek:** unknown key/provider/URL rejected; admin cannot submit SQL/JS/network destination; secret value never returned/logged; changes to tax, accounting, stock, clinical sharing or authentication have effective date and dual approval. Job retry cannot duplicate business mutation.
+
+**Acceptance:** stale config version gets conflict; masked credential never appears in API/log; disabling provider preserves source transactions; audit before/after is redacted and immutable; non-super-admin cannot read health details or operate jobs.
+
+### 027.13 Kontrak workflow lintas modul dan penyelesaian exception
+
+1. Semua workflow dimulai dari source object ID dan `expected_version`; cross-module operation memegang satu source of truth dan tidak membuat transaksi paralel yang nilainya dapat berbeda.
+2. Synchronous atomic effects yang diperlukan untuk kebenaran saldo (payment internal, stock, loyalty ledger, journal) harus commit bersama source di RPC; network effects melalui outbox dan tidak menahan sumber transaksi.
+3. Jika asynchronous effect gagal, source tetap pada status bisnis yang benar dan exception terlihat di queue dengan `retry`, `resolve_manual`, atau `cancel` yang berpermission. Operator tidak menandai event sukses tanpa provider evidence/reconciliation.
+4. Status parent tidak boleh `completed` bila child wajib belum final; child optional dapat `not_required` dengan reason. Contoh: purchase close menunggu receipt/bill policy; stay checkout menunggu care log dan invoice state; medical encounter final tidak menunggu external notification.
+5. Semua workflow menyediakan resume dari checkpoint: load source/status/history -> identifikasi side effects yang sudah terjadi -> retry hanya effect yang belum berhasil menggunakan dedupe key -> rekonsiliasi ledger dan audit.
+6. Halaman detail menampilkan timeline ordered by server timestamp, actor, status change, approval, payment, stock movement, journal, outbox delivery, correction/reversal dan request ID; field sensitif difilter permission.
+
+### 027.14 Acceptance test kontrak modul
+
+Setiap modul wajib memiliki test positif, negatif, concurrency dan recovery: aksi berpermission berhasil; aksi role/cabang lain ditolak; input invalid tidak meninggalkan side effect; retry idempotent; stale version mendapat conflict; audit dan outbox tepat; downstream failure dapat dilihat/dilanjutkan; reversal mempertahankan histori. UAT menandatangani fungsi utama per role, bukan hanya screenshot halaman.
