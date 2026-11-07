@@ -10,36 +10,67 @@ Dokumen ini adalah satu-satunya acuan blueprint PETORA. Kata **WAJIB**, **DILARA
 
 ## Indeks Dokumen
 
-| ID                 | Bagian                                    | Isi                                                              |
-| ------------------ | ----------------------------------------- | ---------------------------------------------------------------- |
-| `PETORA-FINAL-000` | Tata Kelola Spesifikasi                   | Tujuan, istilah, aturan perubahan, keputusan mengikat            |
-| `PETORA-FINAL-001` | Ruang Lingkup Produk                      | Pengguna, konteks, modul, batas sistem                           |
-| `PETORA-FINAL-002` | Keputusan Arsitektur                      | ADR, stack, deployment Vercel/Cloudflare Pages/Supabase          |
-| `PETORA-FINAL-003` | Domain dan Data                           | Entitas, relasi, integritas, skema inti                          |
-| `PETORA-FINAL-004` | Keamanan dan Akses                        | Auth, RBAC, cabang, RLS, privasi, audit                          |
-| `PETORA-FINAL-005` | Backend dan API                           | Batas layanan, transaksi atomik, kontrak API, idempotensi        |
-| `PETORA-FINAL-006` | Frontend dan UX                           | Aplikasi, navigasi, state, aksesibilitas, offline, cetak         |
-| `PETORA-FINAL-007` | Aturan Bisnis                             | POS, stok, harga, booking, klinik, keuangan, SDM                 |
-| `PETORA-FINAL-008` | Modul Organisasi dan Pengguna             | Perusahaan, cabang, user, role, dashboard                        |
-| `PETORA-FINAL-009` | Modul Pelanggan, Hewan, CRM               | Profil, kepemilikan, consent, komunikasi, keluhan                |
-| `PETORA-FINAL-010` | Modul Katalog dan Persediaan              | Produk, gudang, pembelian, stok, batch, transfer                 |
-| `PETORA-FINAL-011` | Modul Penjualan dan Pembayaran            | POS, shift, refund, voucher, retur, rekonsiliasi                 |
-| `PETORA-FINAL-012` | Modul Layanan dan Pet Hotel               | Booking, grooming, daycare, boarding, transport                  |
-| `PETORA-FINAL-013` | Modul Klinik dan Farmasi                  | Rekam medis, resep, lab, tindakan, rawat inap                    |
-| `PETORA-FINAL-014` | Modul Membership dan Promosi              | Tier, poin, kupon, campaign, aturan stacking                     |
-| `PETORA-FINAL-015` | Modul SDM                                 | Karyawan, jadwal, absensi, komisi, payroll                       |
-| `PETORA-FINAL-016` | Modul Keuangan dan Akuntansi              | Kas, piutang, utang, jurnal, pajak, laporan                      |
-| `PETORA-FINAL-017` | Modul Operasional Tambahan                | Aset, SOP, dokumen, pengiriman, toko online                      |
-| `PETORA-FINAL-018` | Super Admin dan Konfigurasi               | Config registry, integrasi, rahasia, feature access              |
-| `PETORA-FINAL-019` | Workflow End-to-End                       | Urutan status dan efek transaksi antarmodul                      |
-| `PETORA-FINAL-020` | Operasional dan Deployment                | Lingkungan, CI/CD, domain, backup, observabilitas                |
-| `PETORA-FINAL-021` | QA dan Kriteria Penerimaan                | Test, security gate, performa, readiness produksi                |
-| `PETORA-FINAL-022` | Kamus, Register ID, dan Keputusan Terbuka | Terminologi, traceability, daftar larangan                       |
-| `PETORA-FINAL-023` | Kontrak Implementasi Terperinci           | Field dictionary, state machine, API, layar, event, laporan, UAT |
-| `PETORA-FINAL-024` | Formula dan Kalkulasi Domain              | Harga, pajak, promo, costing, loyalty, komisi, layanan           |
-| `PETORA-FINAL-025` | Model Otorisasi dan RLS                   | Permission code, cabang, klasifikasi tabel, policy, storage      |
-| `PETORA-FINAL-026` | Runbook Deployment Produksi               | Hosting, migrasi, rollout, rollback, secrets, smoke test         |
-| `PETORA-FINAL-027` | Kontrak Modul, Fungsi, dan Workflow       | Aktor, fungsi, transisi, integrasi, validasi, acceptance         |
+Gunakan indeks ini sebagai peta isi; nomor ID adalah rujukan stabil, bukan urutan prioritas. Bagian `023–029` adalah kontrak rinci yang memperdalam bagian inti, bukan modul terpisah.
+
+### Urutan baca yang disarankan
+
+1. `000–002`: tujuan produk, batas bisnis, dan keputusan arsitektur.
+2. `003–007`: model data, keamanan, backend, frontend, dan aturan bisnis.
+3. `008–018`: spesifikasi modul berdasarkan domain.
+4. `019`: workflow end-to-end antar modul.
+5. `020–022`: deployment, QA/acceptance, serta kamus dan checklist keputusan.
+6. `023–029`: kontrak detail database, API, formula, RLS, fungsi modul, integrasi, dan notifikasi.
+7. `030–031`: onboarding data, privasi, rekonsiliasi, dan operasi.
+
+### A. Tata kelola dan ruang lingkup
+
+- `PETORA-FINAL-000` — konvensi, versi, dan tata kelola spesifikasi.
+- `PETORA-FINAL-001` — model perusahaan, pengguna, cakupan produk, dan batas sistem.
+
+### B. Fondasi teknis dan aturan bersama
+
+- `PETORA-FINAL-002` — ADR, stack, topologi, dan struktur repository.
+- `PETORA-FINAL-003` — entitas, relasi, constraint, dan kamus data inti.
+- `PETORA-FINAL-004` — autentikasi, role, RLS, privasi, dan audit.
+- `PETORA-FINAL-005` — API, function, transaksi atomik, idempotensi, dan outbox.
+- `PETORA-FINAL-006` — aplikasi, route, state, aksesibilitas, POS, dan file.
+- `PETORA-FINAL-007` — invariant dan aturan bisnis lintas modul.
+
+### C. Modul produk
+
+- `PETORA-FINAL-008` — organisasi, cabang, identitas, dan dashboard.
+- `PETORA-FINAL-009` — pelanggan, hewan, consent, CRM, dan keluhan.
+- `PETORA-FINAL-010` — katalog, purchasing, inventory, dan supplier.
+- `PETORA-FINAL-011` — POS, shift, payment, refund, dan struk.
+- `PETORA-FINAL-012` — service, booking, grooming, boarding, dan transport.
+- `PETORA-FINAL-013` — klinik, medical record, farmasi, lab, dan rawat inap.
+- `PETORA-FINAL-014` — membership, loyalty, voucher, promotion, dan campaign.
+- `PETORA-FINAL-015` — karyawan, jadwal, attendance, komisi, dan payroll.
+- `PETORA-FINAL-016` — kas, piutang, utang, jurnal, pajak, dan laporan.
+- `PETORA-FINAL-017` — aset, SOP, dokumen, delivery, budget, dan toko online.
+- `PETORA-FINAL-018` — super admin, konfigurasi, dan integrasi.
+
+### D. Workflow, deployment, dan penerimaan
+
+- `PETORA-FINAL-019` — alur utama lintas modul.
+- `PETORA-FINAL-020` — environment, hosting, CI/CD, backup, dan go-live.
+- `PETORA-FINAL-021` — strategi QA, acceptance gate, performa, dan UAT.
+- `PETORA-FINAL-022` — glossary, register kebutuhan, dan checklist konsistensi.
+
+### E. Referensi implementasi rinci
+
+- `PETORA-FINAL-023` — field contract, state machine, API, layar, event, laporan, dan test.
+- `PETORA-FINAL-024` — formula transaksi, pajak, costing, loyalty, komisi, dan boarding.
+- `PETORA-FINAL-025` — permission registry, kelas data, policy RLS, dan test matrix.
+- `PETORA-FINAL-026` — runbook deploy/rollback Vercel atau Cloudflare Pages dengan Supabase.
+- `PETORA-FINAL-027` — fungsi, aktor, validasi, workflow, dan acceptance per modul.
+- `PETORA-FINAL-028` — kamus field domain klinik, loyalty, SDM, finance, dan komunikasi.
+- `PETORA-FINAL-029` — adapter, webhook, retry, consent, dan rekonsiliasi provider.
+
+### F. Cutover dan operasi
+
+- `PETORA-FINAL-030` — import/export, opening balances, privacy request, dan retensi.
+- `PETORA-FINAL-031` — rekonsiliasi berkala, exception queue, incident, dan operasi cabang.
 
 ---
 
@@ -203,23 +234,24 @@ Nama di bawah adalah nama tabel implementasi; tabel detail dan indeks tambahan d
 
 #### Organisasi, akses, dan sistem
 
-| Tabel                                      | Tujuan dan field kanonis penting                                                                                            |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| `organizations`                            | Singleton organisasi: nama legal/brand, kontak, NPWP opsional, locale, status.                                              |
-| `branches`                                 | `organization_id`, code unik, nama, alamat, timezone, jam operasional, status.                                              |
-| `profiles`                                 | Satu-ke-satu `auth.users`: nama tampilan, kontak, avatar, status; bukan password.                                           |
-| `employees`                                | Nomor pegawai, profil, jabatan, status kerja, tanggal masuk/keluar, cabang utama. PII sensitif dipisahkan/diakses terbatas. |
-| `employee_branch_assignments`              | Relasi karyawan-cabang dan rentang aktif.                                                                                   |
-| `roles`, `permissions`, `role_permissions` | Role scope perusahaan dan permission code stabil.                                                                           |
-| `user_role_assignments`                    | User, role, scope cabang nullable hanya untuk akses semua cabang yang disetujui.                                            |
-| `user_sessions_audit`                      | Peristiwa keamanan yang relevan; token/session secret tidak disimpan.                                                       |
-| `system_config_registry`                   | Daftar key, tipe, schema, scope yang diizinkan, validasi, dampak, nilai default. Dibuat migration, bukan admin bebas.       |
-| `system_config_values`                     | Nilai konfigurasi per organisasi/cabang, versi, actor, waktu; tidak menyimpan secret.                                       |
-| `integration_accounts`                     | Provider, status, referensi secret Vault, scope, status test, metadata nonsecret.                                           |
-| `audit_logs`                               | Append-only actor/action/resource, before/after yang sudah disaring, cabang, request_id, waktu.                             |
-| `idempotency_records`                      | Scope, key, payload hash, status, response aman, expiry. Unique per user/use case/key.                                      |
-| `outbox_events`, `job_runs`                | Event eksternal, percobaan, jadwal retry, hasil/error redacted.                                                             |
-| `document_sequences`                       | Sequence transactional per cabang, jenis dokumen, periode.                                                                  |
+| Tabel                                      | Tujuan dan field kanonis penting                                                                                                    |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `organizations`                            | Singleton organisasi: nama legal/brand, kontak, NPWP opsional, locale, status.                                                      |
+| `branches`                                 | `organization_id`, code unik, nama, alamat, timezone, jam operasional, status.                                                      |
+| `profiles`                                 | Satu-ke-satu `auth.users`: nama tampilan, kontak, avatar, status; bukan password.                                                   |
+| `employees`                                | Nomor pegawai, profil, jabatan, status kerja, tanggal masuk/keluar, cabang utama. PII sensitif dipisahkan/diakses terbatas.         |
+| `employee_branch_assignments`              | Relasi karyawan-cabang dan rentang aktif.                                                                                           |
+| `roles`, `permissions`, `role_permissions` | Role scope perusahaan dan permission code stabil.                                                                                   |
+| `user_role_assignments`                    | User, role, scope cabang nullable hanya untuk akses semua cabang yang disetujui.                                                    |
+| `user_sessions_audit`                      | Peristiwa keamanan yang relevan; token/session secret tidak disimpan.                                                               |
+| `system_config_registry`                   | Daftar key, tipe, schema, scope yang diizinkan, validasi, dampak, nilai default. Dibuat migration, bukan admin bebas.               |
+| `system_config_values`                     | Nilai konfigurasi per organisasi/cabang, versi, actor, waktu; tidak menyimpan secret.                                               |
+| `integration_accounts`                     | Provider, status, referensi secret Vault, scope, status test, metadata nonsecret.                                                   |
+| `payment_method_routes`                    | Routing method per cabang ke integration account yang aktif/teruji; effective dates, settlement mode, approval actor; tanpa secret. |
+| `audit_logs`                               | Append-only actor/action/resource, before/after yang sudah disaring, cabang, request_id, waktu.                                     |
+| `idempotency_records`                      | Scope, key, payload hash, status, response aman, expiry. Unique per user/use case/key.                                              |
+| `outbox_events`, `job_runs`                | Event eksternal, percobaan, jadwal retry, hasil/error redacted.                                                                     |
+| `document_sequences`                       | Sequence transactional per cabang, jenis dokumen, periode.                                                                          |
 
 #### Pelanggan dan hewan
 
@@ -256,21 +288,21 @@ Nama di bawah adalah nama tabel implementasi; tabel detail dan indeks tambahan d
 
 #### Penjualan, pelayanan, klinik
 
-| Tabel                                                          | Tujuan dan field kanonis penting                                                                              |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `cashier_shifts`, `cash_movements`                             | Kasir/cabang/register, saldo awal, cash-in/out, hasil hitung dan selisih tutup shift.                         |
-| `sales_transactions`                                           | Nomor, cabang, customer optional sesuai config, status, snapshot totals/tax, cashier, shift, idempotency ref. |
-| `sales_items`                                                  | Product/service snapshot, qty, harga, discount, tax, line total, lot, staff, pet opsional.                    |
-| `sales_payments`                                               | Metode, amount, status, provider/ref, paid/refunded amount.                                                   |
-| `refunds`, `refund_items`                                      | Referensi transaksi/item asal, qty/nilai maksimal belum direfund, approval, alasan, payment result.           |
-| `services`, `service_branch_prices`                            | Jenis layanan, durasi, buffer, kapasitas, harga dan aturan/species-size per cabang.                           |
-| `bookings`, `booking_services`, `booking_assignments`          | Pelanggan/pet, slot, cabang, staff/resource, estimate/deposit, status, sumber.                                |
-| `grooming_sessions`, `grooming_checklists`                     | Kondisi awal/akhir, foto dengan akses private, checklist, staff, status.                                      |
-| `rooms`, `boarding_stays`, `boarding_care_logs`                | Kapasitas, okupansi rentang waktu, check-in/out, feeding/medication, observasi harian.                        |
-| `medical_records`, `medical_record_amendments`                 | Rekam klinis dengan status draft/final/amended, pencatat dan snapshot perubahan.                              |
-| `medical_diagnoses`, `medical_procedures`                      | Data terstruktur bila diperlukan, selain narasi klinis.                                                       |
-| `prescriptions`, `prescription_items`, `dispensations`         | Dokter, rekam final, aturan dosis, qty, lot yang diserahkan, partial dispense/refill.                         |
-| `lab_orders`, `lab_results`, `surgery_cases`, `hospital_stays` | Order/pemeriksaan, hasil tervalidasi, consent, operasi, monitoring/rawat inap.                                |
+| Tabel                                                          | Tujuan dan field kanonis penting                                                                                                    |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `cashier_shifts`, `cash_movements`                             | Kasir/cabang/register, saldo awal, cash-in/out, hasil hitung dan selisih tutup shift.                                               |
+| `sales_transactions`                                           | Nomor, cabang, customer optional sesuai config, status, snapshot totals/tax, cashier, shift, idempotency ref.                       |
+| `sales_items`                                                  | Product/service snapshot, qty, harga, discount, tax, line total, lot, staff, pet opsional.                                          |
+| `sales_payments`                                               | Metode, amount, status, provider/ref, paid/refunded amount.                                                                         |
+| `refunds`, `refund_items`                                      | Referensi transaksi/item asal, qty/nilai maksimal belum direfund, approval, alasan, payment result.                                 |
+| `services`, `service_branch_prices`                            | Jenis layanan, durasi, buffer, kapasitas, harga dan aturan/species-size per cabang.                                                 |
+| `bookings`, `booking_services`, `booking_assignments`          | Pelanggan/pet, slot, cabang, staff/resource, estimate/deposit, status, sumber.                                                      |
+| `grooming_sessions`, `grooming_checklists`                     | Kondisi awal/akhir, foto dengan akses private, checklist, staff, status.                                                            |
+| `rooms`, `boarding_stays`, `boarding_care_logs`                | Kapasitas, okupansi rentang waktu, check-in/out, feeding/medication, observasi harian.                                              |
+| `medical_records`, `medical_record_amendments`                 | `medical_records` hanya `draft/finalized`; koreksi final memakai amendment bertanda tangan terpisah, bukan status/overwrite parent. |
+| `medical_diagnoses`, `medical_procedures`                      | Data terstruktur bila diperlukan, selain narasi klinis.                                                                             |
+| `prescriptions`, `prescription_items`, `dispensations`         | Dokter, rekam final, aturan dosis, qty, lot yang diserahkan, partial dispense/refill.                                               |
+| `lab_orders`, `lab_results`, `surgery_cases`, `hospital_stays` | Order/pemeriksaan, hasil tervalidasi, consent, operasi, monitoring/rawat inap.                                                      |
 
 #### Membership, SDM, dan keuangan
 
@@ -311,18 +343,18 @@ Index wajib mencakup seluruh FK, `(branch_id, business_date)`, lookup SKU/barcod
 
 Semua field `NOT NULL` di bawah harus memiliki constraint eksplisit; nilai nullable harus mempunyai makna bisnis. Nama dapat disesuaikan saat migration hanya jika kontrak API dan test ikut diperbarui.
 
-| Tabel                                             | Kolom inti dan kontrak                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sales_transactions`                              | `id uuid PK`; `organization_id`, `branch_id`; `transaction_number`; `business_date`; `status` (`completed`, `voided`, `partially_refunded`, `refunded`); `payment_status` (`pending`, `partial`, `paid`, `failed`, `refunded`); `customer_id NULL`; `cashier_user_id`; `shift_id`; `currency='IDR'`; `subtotal`, `discount_total`, `taxable_total`, `tax_total`, `fee_total`, `rounding_total`, `grand_total`, `paid_total`, `change_total bigint`; `tax_snapshot jsonb`; `completed_at`; `created_at`; unique `(branch_id, transaction_number)`. Total non-negatif; `grand_total` sama dengan formula header. |
-| `sales_items`                                     | `id`; `transaction_id FK`; `line_no`; `item_kind` (`product`, `service`, `bundle`); nullable `product_id`/`service_id` dengan tepat satu sumber valid kecuali bundle; `sku_snapshot`, `name_snapshot`, `unit_snapshot`; `quantity numeric(18,4)>0`; `unit_price`, `gross_amount`, `discount_amount`, `taxable_amount`, `tax_amount`, `line_total bigint`; `tax_profile_snapshot`; `warehouse_id NULL`; `pet_id NULL`; `assigned_employee_id NULL`; unique `(transaction_id,line_no)`.                                                                                                                          |
-| `sales_payments`                                  | `id`; `transaction_id FK`; `method`; `amount bigint>0`; `status` (`pending`, `succeeded`, `failed`, `cancelled`, `refunded`); `provider_code/ref` nullable; `idempotency/provider_event_ref` unique jika tersedia; `paid_at`; `refunded_amount bigint` dengan `0<=refunded_amount<=amount`; payment card data tidak disimpan.                                                                                                                                                                                                                                                                                  |
-| `inventory_lots`                                  | `id`; `organization_id`, `branch_id`, `warehouse_id`, `product_id`; `batch_number NULL` hanya bila produk tidak melacak batch; `expiry_date NULL` hanya bila produk tidak mewajibkan expiry; `on_hand_qty`, `reserved_qty numeric(18,4)`; `average_unit_cost bigint`; `received_at`; `archived_at`; check `on_hand_qty>=0`, `reserved_qty>=0`, `reserved_qty<=on_hand_qty` kecuali override resmi; unique index lot aktif dengan NULL semantics yang eksplisit.                                                                                                                                                |
-| `stock_movements`                                 | `id`; scope organisasi/cabang; `warehouse_id`, `product_id`, `inventory_lot_id NULL`; `movement_type`; `quantity_delta numeric(18,4)<>0` bertanda; `unit_cost bigint>=0`; `source_document_type`, `source_document_id`, `source_line_id`; `actor_user_id`; `occurred_at`; `reversal_of_movement_id NULL`; unique sumber untuk mencegah posting ganda. Tidak ada UPDATE/DELETE dari role aplikasi.                                                                                                                                                                                                              |
-| `bookings`                                        | `id`; organisasi/cabang; `booking_number`; customer/pet; `status`; `starts_at`, `ends_at` (`ends_at>starts_at`); `timezone_snapshot`; `service_price_snapshot bigint`; `deposit_due`, `deposit_paid bigint`; source, notes terpisah internal/customer; cancellation actor/reason; created/updated actor. Unique nomor per cabang.                                                                                                                                                                                                                                                                              |
-| `booking_resource_reservations`                   | `id`; booking; resource type/id (staff, room, equipment); `slot tstzrange` `[start,end)`; status aktif/dirilis; exclusion constraint untuk mencegah overlap resource tunggal. Kapasitas lebih dari satu dikontrol lock + counter dalam RPC.                                                                                                                                                                                                                                                                                                                                                                    |
-| `medical_records`                                 | `id`; organisasi/cabang; `record_number`; pet/customer; attending employee; encounter time; status (`draft`, `finalized`, `amended`); `version`; clinical payload terstruktur tervalidasi; `finalized_at/by`; `amends_record_id NULL`; created actor. Rekam final immutable; versi revisi tersimpan di `medical_record_amendments`.                                                                                                                                                                                                                                                                            |
-| `journal_entries` / `journal_lines`               | Header: scope, `journal_number`, `journal_date`, period, source type/id, status, description, posted/reversal refs, actor/approver. Lines: account, branch, description, `debit bigint>=0`, `credit bigint>=0`; tepat satu sisi positif. RPC memvalidasi minimal dua line dan total debit=credit sebelum post.                                                                                                                                                                                                                                                                                                 |
-| `system_config_registry` / `system_config_values` | Registry: `config_key PK`, `value_type`, `schema jsonb`, `default_value`, `allowed_scope`, `edit_permission`, `sensitivity`, `effective_dated`. Values: scope/org/branch, `config_key FK`, `value jsonb`, `version`, `effective_from/to`, actor/time, reason; unique key + scope + effective start. Rahasia dilarang pada tabel ini.                                                                                                                                                                                                                                                                           |
+| Tabel                                             | Kolom inti dan kontrak                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sales_transactions`                              | `id uuid PK`; `organization_id`, `branch_id`; `transaction_number`; `business_date`; `status` (`draft`,`pending_payment`,`completed`,`voided`,`expired`,`partially_refunded`,`refunded`); `payment_status` (`unpaid`,`pending`,`partial`,`paid`,`failed`,`partially_refunded`,`refunded`); customer/cashier/shift refs; `currency='IDR'`; totals as `bigint`; quote/config version; `reservation_expires_at NULL`; `completed_at NULL` until settlement; unique `(branch_id,transaction_number)`. `completed` requires paid/approved tender and all required effects committed. |
+| `sales_items`                                     | `id`; `transaction_id FK`; `line_no`; `item_kind` (`product`, `service`, `bundle`); nullable `product_id`/`service_id` dengan tepat satu sumber valid kecuali bundle; `sku_snapshot`, `name_snapshot`, `unit_snapshot`; `quantity numeric(18,4)>0`; `unit_price`, `gross_amount`, `discount_amount`, `taxable_amount`, `tax_amount`, `line_total bigint`; `tax_profile_snapshot`; `warehouse_id NULL`; `pet_id NULL`; `assigned_employee_id NULL`; unique `(transaction_id,line_no)`.                                                                                           |
+| `sales_payments`                                  | `id`; `transaction_id FK`; `method`; `amount bigint>0` adalah nominal yang dialokasikan ke invoice; `tendered_amount bigint`; `change_amount bigint>=0`; status (`created`,`pending`,`succeeded`,`failed`,`cancelled`,`expired`,`partially_refunded`,`refunded`); provider/ref nullable; unique idempotency/provider event ref; `refunded_amount<=amount`. Cash: `tendered=amount+change`; non-cash: `tendered=amount`, `change=0`. Data kartu tidak disimpan.                                                                                                                  |
+| `inventory_lots`                                  | `id`; `organization_id`, `branch_id`, `warehouse_id`, `product_id`; `batch_number NULL` hanya bila produk tidak melacak batch; `expiry_date NULL` hanya bila produk tidak mewajibkan expiry; `on_hand_qty`, `reserved_qty numeric(18,4)`; `average_unit_cost bigint`; `received_at`; `archived_at`; check `on_hand_qty>=0`, `reserved_qty>=0`, `reserved_qty<=on_hand_qty` kecuali override resmi; unique index lot aktif dengan NULL semantics yang eksplisit.                                                                                                                 |
+| `stock_movements`                                 | `id`; scope organisasi/cabang; `warehouse_id`, `product_id`, `inventory_lot_id NULL`; `movement_type`; `quantity_delta numeric(18,4)<>0` bertanda; `unit_cost bigint>=0`; `source_document_type`, `source_document_id`, `source_line_id`; `actor_user_id`; `occurred_at`; `reversal_of_movement_id NULL`; unique sumber untuk mencegah posting ganda. Tidak ada UPDATE/DELETE dari role aplikasi.                                                                                                                                                                               |
+| `bookings`                                        | `id`; organisasi/cabang; `booking_number`; customer/pet; `status`; `starts_at`, `ends_at` (`ends_at>starts_at`); `timezone_snapshot`; `service_price_snapshot bigint`; `deposit_due`, `deposit_paid bigint`; source, notes terpisah internal/customer; cancellation actor/reason; created/updated actor. Unique nomor per cabang.                                                                                                                                                                                                                                               |
+| `booking_resource_reservations`                   | `id`; booking; resource type/id (staff, room, equipment); `slot tstzrange` `[start,end)`; status aktif/dirilis; exclusion constraint untuk mencegah overlap resource tunggal. Kapasitas lebih dari satu dikontrol lock + counter dalam RPC.                                                                                                                                                                                                                                                                                                                                     |
+| `medical_records`                                 | `id`; organisasi/cabang; `record_number`; pet/customer; attending employee; encounter time; status (`draft`, `finalized`, `amended`); `version`; clinical payload terstruktur tervalidasi; `finalized_at/by`; `amends_record_id NULL`; created actor. Rekam final immutable; versi revisi tersimpan di `medical_record_amendments`.                                                                                                                                                                                                                                             |
+| `journal_entries` / `journal_lines`               | Header: scope, `journal_number`, `journal_date`, period, source type/id, status, description, posted/reversal refs, actor/approver. Lines: account, branch, description, `debit bigint>=0`, `credit bigint>=0`; tepat satu sisi positif. RPC memvalidasi minimal dua line dan total debit=credit sebelum post.                                                                                                                                                                                                                                                                  |
+| `system_config_registry` / `system_config_values` | Registry: `config_key PK`, `value_type`, `schema jsonb`, `default_value`, `allowed_scope`, `edit_permission`, `sensitivity`, `effective_dated`. Values: scope/org/branch, `config_key FK`, `value jsonb`, `version`, `effective_from/to`, actor/time, reason; unique key + scope + effective start. Rahasia dilarang pada tabel ini.                                                                                                                                                                                                                                            |
 
 ### 003.8 Constraint database wajib
 
@@ -333,6 +365,50 @@ Semua field `NOT NULL` di bawah harus memiliki constraint eksplisit; nilai nulla
 - Reservation, voucher usage, document sequence, shift aktif, alokasi refund, dan jurnal sumber memiliki constraint/lock di database, bukan hanya pengecekan UI.
 - Gunakan `btree_gist` dan exclusion constraint hanya pada tabel resource reservation jika extension tersedia di project; jika tidak, implementasikan lock resource di RPC dan test concurrency yang setara.
 - Trigger `updated_at` hanya untuk tabel mutable; trigger audit tidak boleh merekam secret/raw medical payload secara tidak terfilter.
+
+---
+
+### 003.9 Valuasi stok dan referensi movement normatif
+
+Aturan pada bagian ini mengikat seluruh tabel inventory dan mengatasi nama field/enum yang diringkas di `003.2`, `003.7`, `023.2`, serta `023.3`.
+
+**Cost pool tunggal per produk-cabang:** valuasi menggunakan weighted moving average pada kunci `(organization_id, branch_id, product_id)`. Semua gudang milik perusahaan di cabang itu berbagi satu pool; consignment tidak masuk pool perusahaan. Scope `branch_product` adalah keputusan tetap v1.0, ditampilkan read-only di Super Admin, dan tidak dapat diubah sesudah opening stock atau movement pertama. Perpindahan antar gudang dalam cabang tidak mengubah average cost.
+
+Tabel `inventory_cost_pools` adalah proyeksi valuasi otoritatif dengan field: `organization_id`, `branch_id`, `product_id` (unique composite key); `owned_qty numeric(18,4)`; `carrying_value_idr bigint`; `average_unit_cost_idr numeric(20,6)`; `version bigint`; `updated_at`. `average_unit_cost_idr` dihitung dari `carrying_value_idr / owned_qty`; projection harus cocok dengan ledger dan tidak diedit langsung.
+
+`inventory_lots` hanya merepresentasikan kuantitas fisik, reservation, quality, batch/expiry dan `receipt_unit_cost_idr numeric(20,6)` snapshot. Field `average_unit_cost` yang disebut pada ringkasan 003.7 adalah nama lama yang deprecated; migration kanonis **tidak** menyimpan moving average di lot. FEFO memilih lot fisik untuk traceability/expiry; COGS memakai average cost pool pada saat posting, bukan receipt cost lot terpilih.
+
+#### Formula dan posting nilai
+
+Skema canonical menggantikan ringkasan lama: `inventory_lots` menyimpan `receipt_unit_cost_idr`, sedangkan `inventory_cost_pools.average_unit_cost_idr` adalah satu-satunya moving average. `source_document_type/source_document_id` pada ringkasan `stock_movements` tidak dibuat; migration memakai typed FK source columns yang didefinisikan di bawah. `movement_type` allowlist pada bagian ini mengikat seluruh tabel, RPC, import dan test; `opening_balance_in` adalah satu-satunya tipe opening stock v1.0.
+
+Status canonical `medical_records` hanya `draft` dan `finalized`. Koreksi final selalu berada di `medical_record_amendments` dengan status `draft -> signed -> superseded`; UI boleh menampilkan derived badge `amended`, tetapi nilai itu tidak disimpan sebagai status record asli. Dengan demikian parent final tetap immutable.
+
+Costing unit rate menggunakan `numeric(20,6)` Rupiah per unit; extended transaction value dibulatkan ke IDR `bigint`. Pool tidak configurable antar scope pada v1.0: hanya `branch_product`; Super Admin menampilkan scope read-only.
+
+#### Keputusan canonical costing dan movement
+
+```text
+inbound_value = round_idr(received_qty * landed_unit_cost_idr)
+new_owned_qty = old_owned_qty + received_qty
+new_carrying_value = old_carrying_value + inbound_value
+new_average_unit_cost = new_carrying_value / new_owned_qty  # retain 6 decimal places
+
+issue_value = round_idr(issued_qty * average_unit_cost_at_posting)
+new_owned_qty = old_owned_qty - issued_qty
+new_carrying_value = old_carrying_value - issue_value
+```
+
+Jika seluruh pool dikeluarkan, nilai sisa yang terbentuk dari pembulatan dikeluarkan sebagai rounding adjustment agar carrying value kembali nol. Purchase receipt menambah pool pada biaya landed yang disetujui; adjustment masuk memakai cost yang disetujui finance; sale/dispense/damage/expiry/supplier return mengurangi pool pada average saat posting. Transfer antar cabang mengurangi pool source pada average source dan membawa `extended_cost_idr` itu ke pool tujuan; inventory-in-transit tetap merupakan carrying value, bukan expense.
+
+#### Ledger stock movement dan source FK
+
+Setiap movement mempunyai satu source line FK tepat; DILARANG memakai pasangan polymorphic `source_document_type/source_document_id` untuk stock ledger. Field canonical: `source_purchase_receipt_item_id`, `source_sales_item_id`, `source_customer_return_item_id`, `source_supplier_return_item_id`, `source_transfer_item_id`, `source_stock_count_line_id`, `source_dispense_item_id`, atau `source_opening_balance_line_id`; `CHECK` memastikan tepat satu source terisi, kecuali migrasi sistem yang memiliki `system_job_run_id`.
+
+Allowlist `movement_type` v1.0: `opening_balance_in`, `purchase_receipt_in`, `sale_out`, `customer_return_in`, `supplier_return_out`, `transfer_out`, `transfer_in`, `adjustment_in`, `adjustment_out`, `damage_out`, `expiry_out`, `dispense_out`, `consignment_in`, `consignment_out`, `service_consumption_out`. Reservation bukan movement on-hand; reservation commit menghasilkan movement bisnis asal (`sale_out`, `dispense_out`, atau `transfer_out`) dan tidak memakai tipe `reservation_commit`. Setiap row menyimpan signed `quantity_delta`, `unit_cost_idr numeric(20,6)`, `extended_cost_idr bigint`, actor, occurred_at dan reversal reference.
+
+Stock opening import pada 030.2 harus membuat `opening_balance_in` per lot dan menambah cost pool dengan nilai opening yang disetujui finance. Tipe `opening_balance` tanpa suffix pada ringkasan sebelumnya adalah alias lama yang tidak boleh dipakai migration/API baru.
+Stock opening import pada 030.2 harus membuat `opening_balance_in` per lot dan menambah cost pool dengan nilai opening yang disetujui finance. Tipe `opening_balance` tanpa suffix pada ringkasan sebelumnya adalah alias lama yang tidak boleh dipakai migration/API baru.
 
 ---
 
@@ -449,7 +525,27 @@ Scope unique adalah `(actor_id, use_case, idempotency_key)`. Simpan hash canonic
 
 ### 005.5 Transaksi atomik
 
-Mutation kritis mempunyai satu fungsi SQL/RPC per use case. Contoh `sales_create_atomic`: lock lot/balance yang dipakai, validasi harga/izin/stock/shift/voucher/loyalty, hitung ulang total, alokasikan lot FEFO, insert header/items/payments, insert stock movements, update balance, ledger loyalty, journal, outbox, sequence, dan idempotency response, lalu commit. Error di langkah mana pun rollback semuanya. Jangan melakukan reserve via request terpisah lalu mencoba kompensasi di aplikasi.
+#### 005.5.1 Jalur settlement payment normatif
+
+Contoh `sales_create_atomic` pada paragraf berikut hanya berarti jalur pembayaran synchronous yang langsung settled. Gateway, QRIS, e-wallet asynchronous, dan transfer manual **tidak** boleh memakai jalur itu sebelum bukti settlement.
+
+| Jalur                                     | Command/RPC                     | Status setelah command                                            | Efek yang boleh diposting                                                                                                                                                                  |
+| ----------------------------------------- | ------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Cash dan metode synchronous terverifikasi | `sales_create_settled_atomic`   | Sale `completed`, payment `succeeded`                             | sale, tender, stock movement/COGS, loyalty, journal, outbox selesai atomik                                                                                                                 |
+| Gateway asynchronous                      | `sales_create_pending_atomic`   | Sale `pending_payment`, payment `pending`                         | sale/quote snapshot, payment intent lokal, voucher claim dan reservation TTL; tanpa sale stock movement, loyalty earn, revenue/COGS journal atau completion event                          |
+| Callback/status gateway valid             | `payment_settle_atomic`         | Payment `succeeded`; sale `completed` bila seluruh tender lengkap | Verifikasi provider dilakukan di Edge Function; RPC mengunci order/payment/reservations, mengecek amount/currency/reference, lalu commit stok, loyalty, jurnal dan completion event sekali |
+| Intent gagal/kedaluwarsa                  | `payment_expire_atomic`         | Sale `expired` atau `voided`; payment `failed/expired`            | Lepas reservation/voucher claim; tanpa revenue, COGS, loyalty earn, atau stock sale movement                                                                                               |
+| Transfer manual                           | `payment_confirm_manual_atomic` | Payment `succeeded` hanya setelah finance approval                | Bukti transfer wajib, maker-checker; halaman return/upload customer tidak dapat settle payment                                                                                             |
+
+Async gateway harus menjadi satu tender penuh. Split tender hanya boleh memakai metode yang masing-masing synchronous dan sudah terverifikasi. Jika provider gagal setelah pending sale dibuat, retry memakai idempotency key dan provider reference yang sama; jika tidak dapat dipastikan, order tetap `pending_payment` sampai status query atau expiry job. Provider call selalu di luar transaksi PostgreSQL.
+
+`payment_method_routes` menentukan provider/capability per branch+method. Hanya satu route aktif per branch+method; route wajib menunjuk `integration_accounts` yang statusnya `active`, capability dan settlement mode cocok, environment sesuai, serta test connection berhasil. `sandbox` dan `live` tidak boleh tercampur.
+
+Mutation kritis mempunyai satu RPC per use case dan semua perubahan database untuk use case itu commit/rollback bersama. Payment synchronous memakai `sales_create_settled_atomic`: validasi quote/tender, lock stok, tulis sale/items/payments, posting stock/COGS, loyalty, journal, sequence, outbox dan idempotency dalam satu transaksi.
+
+Payment asynchronous memakai `sales_create_pending_atomic`: simpan sale `pending_payment`, quote snapshot, payment intent lokal, voucher claim dan reservasi stok dengan expiry; jangan buat stock movement sale, earn poin, revenue/COGS journal atau event `sales.transaction.completed`. Setelah RPC commit, Edge Function memanggil gateway di luar transaksi dan menyimpan provider intent/ref melalui command idempotent. Webhook hanya diverifikasi di Edge Function; `payment_settle_atomic` lalu mengunci payment/sale/reservasi, memeriksa amount/currency/provider reference dan melakukan completion + stock/loyalty/journal/outbox atomik. Kegagalan/expiry menjalankan `payment_expire_atomic` untuk melepas reservasi/claim dan menutup order tanpa sale effects. Provider call tidak pernah dilakukan di dalam transaksi PostgreSQL.
+
+Async gateway harus menjadi satu tender penuh; split tender hanya untuk metode yang settlement-nya synchronous dan tervalidasi. Settlement bank transfer manual hanya lewat finance permission dan bukti yang tercatat. Kegagalan network dicatat sebagai pending/retry, bukan mengulang key baru.
 
 ### 005.6 Event dan pekerjaan asynchronous
 
@@ -461,23 +557,32 @@ List API menggunakan pagination cursor untuk dataset besar; page/limit dibatasi 
 
 ### 005.8 API use case minimum
 
-| Function / RPC                                     | I/O utama                                        | Permission                     |
-| -------------------------------------------------- | ------------------------------------------------ | ------------------------------ |
-| `sales-create` / `sales_create_atomic`             | cart, pembayaran, customer/pet, key -> transaksi | `pos:transaction:create`       |
-| `sales-refund` / `sales_refund_atomic`             | item/qty/refund reason/approval -> refund        | `pos:refund:create` + approval |
-| `shifts-open`, `shifts-close`                      | register/opening count/closing count -> shift    | `pos:shift:*`                  |
-| `inventory-adjust` / `inventory_adjust_atomic`     | gudang, lot, qty, alasan -> movement             | `inventory:stock:adjust`       |
-| `inventory-transfer` / `inventory_transfer_atomic` | source/target/items -> transfer                  | `inventory:transfer:create`    |
-| `purchasing-receive` / `purchase_receive_atomic`   | PO, accepted qty, batch/expiry -> GR             | `purchase:receipt:create`      |
-| `booking-create`, `booking-transition`             | service, slot, pet, staff -> booking             | `booking:booking:*`            |
-| `medical-record-finalize`                          | draft version -> immutable final record          | `vet:medical_record:finalize`  |
-| `pharmacy-dispense`                                | prescription/items/lot -> dispense               | `pharmacy:dispense`            |
-| `payroll-run`, `payroll-approve`                   | period -> snapshot/approval                      | `hr:payroll:*`                 |
-| `config-update`                                    | config key/value/version -> audited version      | `settings:config:update`       |
-| `integration-test`                                 | provider reference -> connection result          | `settings:integration:test`    |
-| `jobs-process-outbox`                              | bounded batch -> processing report               | internal scheduler only        |
+| Function / RPC                                         | I/O utama                                                             | Permission                                                    |
+| ------------------------------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `sales-create-settled` / `sales_create_settled_atomic` | quote, synchronous tenders, shift, key -> completed sale              | `pos:transaction:create`                                      |
+| `sales-create-pending` / `sales_create_pending_atomic` | quote, async payment route, shift, key -> pending sale + reservations | `pos:transaction:create`                                      |
+| `payment-settle` / `payment_settle_atomic`             | verified provider/manual approval event -> settled sale               | internal verified worker atau `finance:payment:settle_manual` |
+| `payment-expire` / `payment_expire_atomic`             | pending sale/payment ID + expiry version -> release reservations      | internal scheduler only                                       |
+| `sales-refund` / `sales_refund_atomic`                 | item/qty/refund reason/approval -> refund                             | `pos:refund:create` + approval                                |
+| `shifts-open`, `shifts-close`                          | register/opening count/closing count -> shift                         | `pos:shift:*`                                                 |
+| `inventory-adjust` / `inventory_adjust_atomic`         | gudang, lot, qty, alasan -> movement                                  | `inventory:stock:adjust`                                      |
+| `inventory-transfer` / `inventory_transfer_atomic`     | source/target/items -> transfer                                       | `inventory:transfer:create`                                   |
+| `purchasing-receive` / `purchase_receive_atomic`       | PO, accepted qty, batch/expiry -> GR                                  | `purchase:receipt:create`                                     |
+| `booking-create`, `booking-transition`                 | service, slot, pet, staff -> booking                                  | `booking:booking:*`                                           |
+| `medical-record-finalize`                              | draft version -> immutable final record                               | `vet:medical_record:finalize`                                 |
+| `pharmacy-dispense`                                    | prescription/items/lot -> dispense                                    | `pharmacy:dispense`                                           |
+| `payroll-run`, `payroll-approve`                       | period -> snapshot/approval                                           | `hr:payroll:*`                                                |
+| `config-update`                                        | config key/value/version -> audited version                           | `settings:config:update`                                      |
+| `integration-test`                                     | provider reference -> connection result                               | `settings:integration:test`                                   |
+| `jobs-process-outbox`                                  | bounded batch -> processing report                                    | internal scheduler only                                       |
 
 ---
+
+#### Resolusi nama endpoint penjualan
+
+HTTP endpoint publik tetap `sales-create` untuk kompatibilitas UI. Handler membaca `payment_method_routes` dan memilih tepat satu command: `sales_create_settled_atomic` untuk tender synchronous atau `sales_create_pending_atomic` untuk tender asynchronous. Nama `sales_create_atomic` pada baris tabel 005.8 dan contoh lama adalah alias dokumentasi yang deprecated; implementasi baru tidak membuat satu RPC generik yang mem-post semua efek untuk kedua jalur.
+
+Settlement callback memakai endpoint internal `payment-settle` setelah verifikasi Edge Function dan memanggil `payment_settle_atomic`; expiry scheduler memakai `payment-expire`. Endpoint public tidak menerima `payment_status`, provider reference yang dipercaya, hasil verifikasi, stock movement, journal, atau status sale dari client.
 
 ## PETORA-FINAL-006 - Frontend dan UX
 
@@ -595,7 +700,7 @@ CSP mengikuti host aktual; hindari `unsafe-eval`, inline script, dan wildcard co
 ### 007.6 Loyalty, promo, pajak
 
 - `BR-PET-LOY-001`: poin disimpan sebagai ledger earn/redeem/expire/reversal; tidak mengedit saldo historis.
-- `BR-PET-LOY-002`: poin dihitung dari eligible net spend setelah diskon dan sebelum/atau sesudah pajak sesuai setting program yang berversi.
+- `BR-PET-LOY-002`: poin dihitung dari eligible net spend setelah diskon dan sebelum pajak; tax, shipping, deposit, gift card dan redemption tidak memperoleh poin. Basis ini fixed di v1.0 dan tidak dapat diubah lewat config.
 - `BR-PET-PROMO-001`: engine promo mengevaluasi tanggal, cabang, channel, kategori, tier, minimum belanja, kuota dan stacking deterministik.
 - `BR-PET-PROMO-002`: voucher usage/reservation diklaim atomik agar tidak oversubscribe.
 - `BR-PET-TAX-001`: tax profile memiliki effective dates, inclusive/exclusive mode, tax category, rounding dan mapping akun. Rate produksi harus dikonfirmasi finance sesuai regulasi berjalan; tidak ada angka tarif legal permanen yang ditanam di kode.
@@ -859,30 +964,34 @@ Provider dipilih saat implementasi berdasarkan kebutuhan dan ketersediaan akun: 
 
 Nilai di bawah disemai melalui migration. Perubahan nilai dilakukan lewat config service, berversi dan diaudit. Nominal uang config disimpan sebagai string integer Rupiah di JSON agar tidak terkena presisi floating point JavaScript.
 
-| Config key                            | Tipe / scope                     | Default                                 | Aturan                                                                                                                                                                                             |
-| ------------------------------------- | -------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `organization.default_timezone`       | IANA timezone / organisasi       | `Asia/Jakarta`                          | Tiap cabang boleh override dengan timezone valid.                                                                                                                                                  |
-| `pos.require_customer`                | boolean / organisasi-cabang      | `false`                                 | Modul klinik dapat mewajibkan customer dan pet terdaftar secara terpisah.                                                                                                                          |
-| `pos.allow_negative_stock`            | boolean / organisasi             | `false`                                 | Override perlu permission owner, alasan, alert dan audit; jangan izinkan obat/lot expired.                                                                                                         |
-| `pos.cashier_discount_limit_percent`  | decimal / role-cabang            | `0`                                     | Nilai lebih dari nol harus disetujui owner; floor price tetap berlaku.                                                                                                                             |
-| `pos.refund_window_days`              | integer hari / organisasi        | `30`                                    | Perubahan hanya memengaruhi request refund baru.                                                                                                                                                   |
-| `pos.refund_requires_approval`        | boolean / organisasi             | `true`                                  | Default semua refund perlu approval; batas nominal dapat memperketat, bukan menonaktifkan audit.                                                                                                   |
-| `inventory.valuation_method`          | enum / organisasi                | `moving_average`                        | Tidak dapat diganti setelah transaksi pertama tanpa migrasi costing dan persetujuan finance.                                                                                                       |
-| `inventory.expiry_alert_days`         | array integer / organisasi       | `[30,7,1]`                              | Alert hanya; expiry blocking tetap enforced saat penjualan/dispense.                                                                                                                               |
-| `booking.minimum_lead_time_minutes`   | integer / cabang                 | `60`                                    | Service dapat memiliki nilai yang lebih ketat.                                                                                                                                                     |
-| `booking.no_show_grace_minutes`       | integer / cabang                 | `30`                                    | Job menandai no-show setelah waktu lokal booking + grace.                                                                                                                                          |
-| `booking.reminder_offsets_minutes`    | array integer / cabang           | `[1440,60]`                             | Notifikasi hanya jika consent/channel valid; dedupe key per booking+offset.                                                                                                                        |
-| `boarding.billing_method`             | enum / cabang                    | `elapsed_24h`                           | Opsi `elapsed_24h` atau `local_night`; metode disimpan pada booking/stay snapshot dan terkunci saat check-in.                                                                                      |
-| `boarding.billing_unit_hours`         | integer jam / cabang             | `24`                                    | Dipakai hanya untuk `elapsed_24h`; nilai positif, effective date berlaku untuk stay baru.                                                                                                          |
-| `boarding.checkout_grace_minutes`     | integer menit / cabang           | `120`                                   | Dikurangkan sebelum pembulatan unit; nilai disimpan pada stay saat check-in.                                                                                                                       |
-| `loyalty.enabled`                     | boolean / organisasi             | `false`                                 | Sebelum enable, konfigurasi ratio earning, value, expiry, rounding, eligible spend dan refund policy.                                                                                              |
-| `promotion.max_vouchers_per_sale`     | integer / organisasi             | `1`                                     | Penggunaan voucher atomik; stacking promo mengikuti rule version.                                                                                                                                  |
-| `tax.default_profile_id`              | UUID nullable / organisasi       | `null`                                  | **Go-live blocker** sampai finance mengisi profile dan memetakan setiap SKU/service ke tax category yang sah. Tidak ada rate legal bawaan.                                                         |
-| `accounting.post_sales_automatically` | boolean / organisasi             | `true` setelah setup                    | Tidak boleh enable sebelum COA dan seluruh account mapping tervalidasi. Jika auto-post gagal, transaksi tetap rollback atau masuk flow pending yang eksplisit; tidak boleh diam-diam tanpa jurnal. |
-| `documents.number_format`             | template allowlist / cabang-tipe | `{PREFIX}/{BRANCH}/{YYYY}/{MM}/{SEQ:6}` | Token allowlist saja; uniqueness tetap dijamin DB.                                                                                                                                                 |
-| `notifications.enabled_channels`      | enum array / organisasi          | `[]`                                    | Provider off sampai credentials diuji; in-app internal dapat aktif tanpa external provider.                                                                                                        |
-| `integrations.*.enabled`              | boolean / integrasi              | `false`                                 | Hanya adapter yang terdaftar; production credential terpisah dari sandbox.                                                                                                                         |
-| `security.customer_portal_enabled`    | boolean / organisasi             | `false`                                 | Enable setelah Auth redirect, consent, RLS dan customer-link flow lulus test.                                                                                                                      |
+| Config key                                   | Tipe / scope                     | Default                                 | Aturan                                                                                                                                                                                             |
+| -------------------------------------------- | -------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `organization.default_timezone`              | IANA timezone / organisasi       | `Asia/Jakarta`                          | Tiap cabang boleh override dengan timezone valid.                                                                                                                                                  |
+| `pos.require_customer`                       | boolean / organisasi-cabang      | `false`                                 | Modul klinik dapat mewajibkan customer dan pet terdaftar secara terpisah.                                                                                                                          |
+| `pos.allow_negative_stock`                   | boolean / organisasi             | `false`                                 | Override perlu permission owner, alasan, alert dan audit; jangan izinkan obat/lot expired.                                                                                                         |
+| `pos.cashier_discount_limit_percent`         | decimal / role-cabang            | `0`                                     | Nilai lebih dari nol harus disetujui owner; floor price tetap berlaku.                                                                                                                             |
+| `pos.refund_window_days`                     | integer hari / organisasi        | `30`                                    | Perubahan hanya memengaruhi request refund baru.                                                                                                                                                   |
+| `pos.refund_requires_approval`               | boolean / organisasi             | `true`                                  | Default semua refund perlu approval; batas nominal dapat memperketat, bukan menonaktifkan audit.                                                                                                   |
+| `payments.enabled_methods`                   | enum array / cabang              | `["cash"]`                              | Metode non-cash hanya dapat diaktifkan jika route provider atau proses settlement manual sudah diuji.                                                                                              |
+| `payments.intent_ttl_minutes`                | integer / cabang                 | `15`                                    | Range 5-60 menit; di-snapshot ke pending order dan expiry job melepas reservation/claim.                                                                                                           |
+| `payments.manual_transfer_requires_approval` | boolean / organisasi             | `true`                                  | Bank transfer/manual payment hanya disettle oleh finance berizin dengan bukti dan maker-checker.                                                                                                   |
+| `inventory.valuation_method`                 | enum / organisasi                | `moving_average`                        | Tidak dapat diganti setelah transaksi pertama tanpa migrasi costing dan persetujuan finance.                                                                                                       |
+| `inventory.cost_pool_scope`                  | enum / organisasi                | `branch_product`                        | Pool biaya ditetapkan per produk+branch; ditampilkan read-only setelah opening stock pertama. Perubahan butuh revaluation/migration terkontrol.                                                    |
+| `inventory.expiry_alert_days`                | array integer / organisasi       | `[30,7,1]`                              | Alert hanya; expiry blocking tetap enforced saat penjualan/dispense.                                                                                                                               |
+| `booking.minimum_lead_time_minutes`          | integer / cabang                 | `60`                                    | Service dapat memiliki nilai yang lebih ketat.                                                                                                                                                     |
+| `booking.no_show_grace_minutes`              | integer / cabang                 | `30`                                    | Job menandai no-show setelah waktu lokal booking + grace.                                                                                                                                          |
+| `booking.reminder_offsets_minutes`           | array integer / cabang           | `[1440,60]`                             | Notifikasi hanya jika consent/channel valid; dedupe key per booking+offset.                                                                                                                        |
+| `boarding.billing_method`                    | fixed enum / cabang              | `elapsed_24h`                           | Satu-satunya policy boarding pada PETORA v1.0; read-only di dashboard. `local_night` tidak didukung.                                                                                               |
+| `boarding.billing_unit_hours`                | integer jam / cabang             | `24`                                    | Dipakai hanya untuk `elapsed_24h`; nilai positif, effective date berlaku untuk stay baru.                                                                                                          |
+| `boarding.checkout_grace_minutes`            | integer menit / cabang           | `120`                                   | Dikurangkan sebelum pembulatan unit; nilai disimpan pada stay saat check-in.                                                                                                                       |
+| `loyalty.enabled`                            | boolean / organisasi             | `false`                                 | Sebelum enable, konfigurasi ratio earning, value, expiry, rounding, eligible spend dan refund policy.                                                                                              |
+| `promotion.max_vouchers_per_sale`            | integer / organisasi             | `1`                                     | Penggunaan voucher atomik; stacking promo mengikuti rule version.                                                                                                                                  |
+| `tax.default_profile_id`                     | UUID nullable / organisasi       | `null`                                  | **Go-live blocker** sampai finance mengisi profile dan memetakan setiap SKU/service ke tax category yang sah. Tidak ada rate legal bawaan.                                                         |
+| `accounting.post_sales_automatically`        | boolean / organisasi             | `true` setelah setup                    | Tidak boleh enable sebelum COA dan seluruh account mapping tervalidasi. Jika auto-post gagal, transaksi tetap rollback atau masuk flow pending yang eksplisit; tidak boleh diam-diam tanpa jurnal. |
+| `documents.number_format`                    | template allowlist / cabang-tipe | `{PREFIX}/{BRANCH}/{YYYY}/{MM}/{SEQ:6}` | Token allowlist saja; uniqueness tetap dijamin DB.                                                                                                                                                 |
+| `notifications.enabled_channels`             | enum array / organisasi          | `[]`                                    | Provider off sampai credentials diuji; in-app internal dapat aktif tanpa external provider.                                                                                                        |
+| `integrations.*.enabled`                     | boolean / integrasi              | `false`                                 | Hanya adapter yang terdaftar; production credential terpisah dari sandbox.                                                                                                                         |
+| `security.customer_portal_enabled`           | boolean / organisasi             | `false`                                 | Enable setelah Auth redirect, consent, RLS dan customer-link flow lulus test.                                                                                                                      |
 
 Sebelum produksi, checklist konfigurasi wajib berstatus valid untuk timezone/cabang, sequence, role seed, COA/mapping, tax profile, batas discount/refund, payment method, inventory policy, receipt, consent/template, dan integration sandbox/production. Panel menampilkan blocker dan tidak menyediakan tombol bypass.
 
@@ -895,10 +1004,11 @@ Sebelum produksi, checklist konfigurasi wajib berstatus valid untuk timezone/cab
 1. Kasir login/MFA sesuai kebijakan, memilih cabang/register dan membuka shift dengan opening float.
 2. Scan produk; server lookup memastikan product aktif, harga cabang dan stok; UI menunjukkan lot/expiry warning jika relevan.
 3. Pilih customer/pet opsional, promo dan poin. Server preview menghitung ulang menggunakan versi config.
-4. Kasir memilih metode. Untuk cash, amount/cashback divalidasi; untuk gateway, buat payment intent dan status pending.
-5. Untuk penjualan internal/cash, `sales_create_atomic` commit transaksi, item snapshot, payment, stock movements/balances, loyalty, jurnal dan outbox.
-6. Server mengembalikan transaction ID/number; UI hanya menyatakan sukses setelah commit. Receipt/notification diproses asynchronous dan dapat dicoba ulang.
-7. Timeout: kasir mencari hasil memakai idempotency key; tidak submit transaksi baru.
+4. Kasir memilih tender. Untuk cash/metode synchronous, `sales_create_settled_atomic` memvalidasi tender dan menyelesaikan seluruh efek dalam satu transaksi DB.
+5. Untuk gateway/transfer asynchronous, `sales_create_pending_atomic` menyimpan quote, payment intent lokal, voucher claim dan reservation TTL; Edge Function membuat intent provider setelah commit. UI menampilkan status menunggu, bukan berhasil.
+6. Webhook dengan signature valid atau finance approval memanggil `payment_settle_atomic`; fungsi mengunci sale/payment, memeriksa amount/currency/reference, lalu mem-post stock, loyalty, jurnal dan `sales.transaction.completed` tepat sekali.
+7. Jika intent gagal/kedaluwarsa, `payment_expire_atomic` melepas reservation dan claim tanpa sale movement, loyalty earn, revenue atau COGS. Timeout memakai idempotency key lama dan status lookup; jangan membuat intent/order baru secara buta.
+8. Struk final dan notifikasi dikirim setelah status completed; printer/provider gagal tidak membatalkan sale yang sudah commit.
 
 ### 019.2 Pembelian sampai pembayaran supplier
 
@@ -1076,12 +1186,6 @@ Gunakan seed deterministik dengan user role, cabang, produk batch, saldo awal, c
 
 ---
 
-## Penetapan
-
-`PETORA-FINAL-BLUEPRINT-000` adalah spesifikasi normatif produk dan deployment PETORA. Pengembangan harus mengikuti keputusan dan invariant di atas. Pengecualian hanya boleh dilakukan melalui keputusan perubahan terdokumentasi yang memperbarui bagian, requirement, database, API, UI, test dan prosedur operasi terkait. Spesifikasi ini menetapkan target readiness; implementasi tetap harus memenuhi seluruh acceptance gate sebelum dinyatakan siap produksi.
-
----
-
 ## PETORA-FINAL-023 - Kontrak Implementasi Terperinci
 
 Bagian ini melengkapi bagian sebelumnya dengan nama field inti, state machine, kontrak request/response, perilaku layar, event, definisi laporan, dan contoh penerimaan yang mengikat. Jika suatu kolom diberi tipe atau constraint di sini, implementasi wajib merepresentasikannya di migration dan test; daftar ini tidak menggantikan RLS atau aturan bisnis pada bagian lain.
@@ -1148,21 +1252,21 @@ Tabel bisnis selain ledger menggunakan kolom umum berikut kecuali ada pengecuali
 
 Semua transition dilakukan melalui use case API/RPC; client tidak mengubah kolom status langsung. Transition gagal dengan `409 INVALID_STATE_TRANSITION` bila status sumber tidak sesuai. Setiap transisi menulis `status_history`/audit dengan actor, waktu, alasan, dan request ID.
 
-| Aggregate         | Status/transition legal                                                                                                                        | Efek saat transition final                                                                                                                                                                                                             |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sales transaction | `draft -> completed`; `draft -> voided`; `completed -> partially_refunded -> refunded`; `completed -> refunded` bila seluruh nilai direfund    | `completed` memposting payment, stock, loyalty dan jurnal. `voided` tidak menghasilkan sale. Refund membuat record baru dan reversal, tidak mengedit line sumber. Payment pending gateway berada di payment status, bukan status sale. |
-| Payment           | `created -> pending -> succeeded`; `created/pending -> failed/expired/cancelled`; `succeeded -> partially_refunded -> refunded`                | Hanya callback/status provider tervalidasi yang menandai settlement eksternal. Uang internal tidak dianggap diterima sebelum `succeeded`.                                                                                              |
-| Purchase order    | `draft -> pending_approval -> approved -> ordered -> partially_received -> received -> closed`; reject/cancel hanya pada status yang diizinkan | `received` menyatakan qty penuh diterima; PO dapat ditutup dengan short-close beralasan. Receipt terpisah menentukan stock posting.                                                                                                    |
-| Goods receipt     | `draft -> posted`; `draft -> voided`                                                                                                           | `posted` immutable dan membuat movements; koreksi memakai return/reversal receipt.                                                                                                                                                     |
-| Stock transfer    | `draft -> pending_approval -> approved -> dispatched -> partially_received -> received -> closed`; `draft/approved -> cancelled`               | Dispatch memindahkan saldo ke transit; receiving membukukan saldo tujuan; selisih memerlukan claim/adjustment terpisah.                                                                                                                |
-| Booking           | `requested -> confirmed -> checked_in -> in_progress -> completed`; `requested/confirmed -> cancelled` atau `no_show`                          | `reschedule` bukan status final: simpan event reschedule dan versi slot baru; slot lama dilepas atomik. Deposit/payment status terpisah.                                                                                               |
-| Grooming session  | `planned -> checked_in -> in_progress -> awaiting_pickup -> completed`; status non-final dapat `cancelled`                                     | Add-on yang mengubah harga memerlukan persetujuan customer dan snapshot sebelum dilakukan.                                                                                                                                             |
-| Boarding stay     | `reserved -> checked_in -> active -> checkout_pending -> checked_out`; reservasi dapat `cancelled/no_show`                                     | Checkout mengunci perhitungan bill dan release kamar hanya setelah cleaning checklist.                                                                                                                                                 |
-| Medical record    | `draft -> finalized`; final record tidak diedit. Amendment mempunyai lifecycle `draft -> signed -> superseded`                                 | `signed` amendment tidak menimpa isi lama; record asal menunjukkan ada amendment melalui relasi/version.                                                                                                                               |
-| Prescription      | `active -> partially_dispensed -> dispensed`; `active/partial -> cancelled/expired`                                                            | Dispensing mengecek qty tersisa dan stok dalam satu transaksi. Setiap dispense adalah fakta terpisah.                                                                                                                                  |
-| Journal entry     | `draft -> posted -> reversed`                                                                                                                  | `reversed` hanya bila reversal entry yang seimbang telah dipost; perubahan berikutnya dibuat entry baru. Periode closed menolak post.                                                                                                  |
-| Payroll run       | `draft -> calculated -> review -> approved -> paid -> closed`; draft/calculated dapat `cancelled`; approved perlu reopen berizin               | Setiap calculate menghasilkan version; approval dan pembayaran dicatat terpisah; final line tidak di-overwrite.                                                                                                                        |
-| Outbox job        | `pending -> processing -> succeeded`; gagal `retry_wait -> processing`, akhir `dead_letter`                                                    | Claim lease dan dedupe key mencegah worker paralel menggandakan side effect. Retry manual mencatat actor dan alasan.                                                                                                                   |
+| Aggregate         | Status/transition legal                                                                                                                                                          | Efek saat transition final                                                                                                                                                                                             |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sales transaction | `draft -> pending_payment -> completed`; `draft -> completed` untuk tender synchronous; `draft/pending_payment -> voided/expired`; `completed -> partially_refunded -> refunded` | Pending order hanya memegang reservation/claim. `completed` mem-post payment, stock, loyalty dan journal; expiry melepas reservation tanpa sale effect. Refund membuat record/reversal baru, tidak mengedit sale asli. |
+| Payment           | `created -> pending -> succeeded`; `created/pending -> failed/expired/cancelled`; `succeeded -> partially_refunded -> refunded`                                                  | Hanya callback/status provider tervalidasi yang menandai settlement eksternal. Uang internal tidak dianggap diterima sebelum `succeeded`.                                                                              |
+| Purchase order    | `draft -> pending_approval -> approved -> ordered -> partially_received -> received -> closed`; reject/cancel hanya pada status yang diizinkan                                   | `received` menyatakan qty penuh diterima; PO dapat ditutup dengan short-close beralasan. Receipt terpisah menentukan stock posting.                                                                                    |
+| Goods receipt     | `draft -> posted`; `draft -> voided`                                                                                                                                             | `posted` immutable dan membuat movements; koreksi memakai return/reversal receipt.                                                                                                                                     |
+| Stock transfer    | `draft -> pending_approval -> approved -> dispatched -> partially_received -> received -> closed`; `draft/approved -> cancelled`                                                 | Dispatch memindahkan saldo ke transit; receiving membukukan saldo tujuan; selisih memerlukan claim/adjustment terpisah.                                                                                                |
+| Booking           | `requested -> confirmed -> checked_in -> in_progress -> completed`; `requested/confirmed -> cancelled` atau `no_show`                                                            | `reschedule` bukan status final: simpan event reschedule dan versi slot baru; slot lama dilepas atomik. Deposit/payment status terpisah.                                                                               |
+| Grooming session  | `planned -> checked_in -> in_progress -> awaiting_pickup -> completed`; status non-final dapat `cancelled`                                                                       | Add-on yang mengubah harga memerlukan persetujuan customer dan snapshot sebelum dilakukan.                                                                                                                             |
+| Boarding stay     | `reserved -> checked_in -> active -> checkout_pending -> checked_out`; reservasi dapat `cancelled/no_show`                                                                       | Checkout mengunci perhitungan bill dan release kamar hanya setelah cleaning checklist.                                                                                                                                 |
+| Medical record    | `draft -> finalized`; final record tidak diedit. Amendment mempunyai lifecycle `draft -> signed -> superseded`                                                                   | `signed` amendment tidak menimpa isi lama; record asal menunjukkan ada amendment melalui relasi/version.                                                                                                               |
+| Prescription      | `active -> partially_dispensed -> dispensed`; `active/partial -> cancelled/expired`                                                                                              | Dispensing mengecek qty tersisa dan stok dalam satu transaksi. Setiap dispense adalah fakta terpisah.                                                                                                                  |
+| Journal entry     | `draft -> posted -> reversed`                                                                                                                                                    | `reversed` hanya bila reversal entry yang seimbang telah dipost; perubahan berikutnya dibuat entry baru. Periode closed menolak post.                                                                                  |
+| Payroll run       | `draft -> calculated -> review -> approved -> paid -> closed`; draft/calculated dapat `cancelled`; approved perlu reopen berizin                                                 | Setiap calculate menghasilkan version; approval dan pembayaran dicatat terpisah; final line tidak di-overwrite.                                                                                                        |
+| Outbox job        | `pending -> processing -> succeeded`; gagal `retry_wait -> processing`, akhir `dead_letter`                                                                                      | Claim lease dan dedupe key mencegah worker paralel menggandakan side effect. Retry manual mencatat actor dan alasan.                                                                                                   |
 
 ### 023.4 Kontrak request/response API per use case
 
@@ -1221,20 +1325,20 @@ Setiap layar harus mendefinisikan permission route, branch context, filter tersi
 
 Event ditulis ke outbox pada commit sumber. Payload memakai schema version, event ID UUID, aggregate ID/version, organization/branch, occurrence time, actor kind, correlation/request ID, serta data minimum. Consumer harus idempotent dan tidak memuat PII yang tidak diperlukan.
 
-| Event                         | Producer                            | Consumer/side effect                                                            | Dedupe/retry                                                    |
-| ----------------------------- | ----------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `sales.transaction.completed` | `sales_create_atomic`               | receipt job, loyalty/report projection, notification                            | unique event ID; payment state harus succeeded/internal settled |
-| `sales.refund.completed`      | `sales_refund_atomic`               | payment refund, inventory return if accepted, accounting reversal, notification | refund ID sebagai dedupe; payment provider retry terpisah       |
-| `inventory.stock.low`         | stock projection/job                | internal notification, reorder suggestion                                       | key product+branch+threshold-version; daily suppression         |
-| `inventory.lot.expiring`      | scheduled query                     | inventory/pharmacy alert                                                        | key lot+alert offset; stop after lot depleted                   |
-| `booking.confirmed`           | booking transition                  | customer reminder scheduling, staff queue                                       | booking version+template+offset                                 |
-| `booking.cancelled`           | booking transition                  | release reservation, deposit policy, notify                                     | cancellation event ID; release idempotent                       |
-| `service.completed`           | grooming/boarding/clinic completion | invoice draft, commission candidate, survey                                     | service completion version                                      |
-| `medical_record.finalized`    | medical finalize RPC                | document/PDF, portal share workflow, follow-up queue                            | record ID+version; content stays private by default             |
-| `pharmacy.dispensed`          | dispense RPC                        | label/receipt, stock alert, accounting                                          | dispense ID; never auto-send medical detail to external channel |
-| `purchase.receipt.posted`     | receive RPC                         | stock projection, GRNI/AP, variance alert                                       | receipt ID unique                                               |
-| `payroll.approved`            | payroll approval                    | journal/payable/slip generation                                                 | run ID+version                                                  |
-| `integration.delivery.failed` | adapter worker                      | retry scheduler, admin health alert                                             | provider event/message ID; bounded retries then dead letter     |
+| Event                         | Producer                                                   | Consumer/side effect                                                            | Dedupe/retry                                                    |
+| ----------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `sales.transaction.completed` | `sales_create_settled_atomic` atau `payment_settle_atomic` | receipt job, loyalty/report projection, notification                            | unique event ID; hanya setelah seluruh tender settled           |
+| `sales.refund.completed`      | `sales_refund_atomic`                                      | payment refund, inventory return if accepted, accounting reversal, notification | refund ID sebagai dedupe; payment provider retry terpisah       |
+| `inventory.stock.low`         | stock projection/job                                       | internal notification, reorder suggestion                                       | key product+branch+threshold-version; daily suppression         |
+| `inventory.lot.expiring`      | scheduled query                                            | inventory/pharmacy alert                                                        | key lot+alert offset; stop after lot depleted                   |
+| `booking.confirmed`           | booking transition                                         | customer reminder scheduling, staff queue                                       | booking version+template+offset                                 |
+| `booking.cancelled`           | booking transition                                         | release reservation, deposit policy, notify                                     | cancellation event ID; release idempotent                       |
+| `service.completed`           | grooming/boarding/clinic completion                        | invoice draft, commission candidate, survey                                     | service completion version                                      |
+| `medical_record.finalized`    | medical finalize RPC                                       | document/PDF, portal share workflow, follow-up queue                            | record ID+version; content stays private by default             |
+| `pharmacy.dispensed`          | dispense RPC                                               | label/receipt, stock alert, accounting                                          | dispense ID; never auto-send medical detail to external channel |
+| `purchase.receipt.posted`     | receive RPC                                                | stock projection, GRNI/AP, variance alert                                       | receipt ID unique                                               |
+| `payroll.approved`            | payroll approval                                           | journal/payable/slip generation                                                 | run ID+version                                                  |
+| `integration.delivery.failed` | adapter worker                                             | retry scheduler, admin health alert                                             | provider event/message ID; bounded retries then dead letter     |
 
 ### 023.7 Definisi laporan dan angka dashboard
 
@@ -1310,6 +1414,8 @@ Urutan stacking baku: harga efektif cabang -> harga grosir yang memenuhi qty -> 
 
 ### 024.3 Kuantitas, costing, dan FEFO
 
+Scope formula berikut selalu `inventory_cost_pools` per `(organization_id, branch_id, product_id)` sebagaimana diputuskan pada 003.9. FEFO hanya menentukan lot fisik yang diambil; biaya COGS bukan `receipt_unit_cost_idr` lot tersebut, melainkan `average_unit_cost_idr` pool saat posting. `old_average_unit_cost` pada rumus berarti average pool, bukan biaya rata-rata lot.
+
 Semua kuantitas dinormalisasi ke unit dasar sebelum stok berubah. Receiving mengonversi harga unit beli ke harga per unit dasar, termasuk alokasi biaya landed yang disetujui. Untuk moving average setelah penerimaan:
 
 ```text
@@ -1347,7 +1453,7 @@ billable_units = max(1, ceil(max(0, elapsed - checkout_grace) / billing_unit))
 boarding_charge = billable_units * rate_per_unit_snapshot
 ```
 
-Perusahaan dapat memilih policy per-night berbasis tanggal lokal jika demikian praktik operasionalnya; policy tersebut menjadi `billing_method` berversi dan wajib dipilih sebelum menerima booking. Billing method tidak dapat diganti setelah check-in. Deposit adalah liabilitas sampai diaplikasikan ke invoice/refund; deposit tidak dihitung revenue saat diterima.
+PETORA v1.0 hanya mendukung billing elapsed 24 jam: `billable_units = max(1, ceil(max(0, elapsed - checkout_grace) / billing_unit))`. Super Admin dapat mengatur `billing_unit_hours` dan `checkout_grace_minutes` per cabang dengan effective date; tarif dan parameter disalin ke stay saat check-in dan tidak berubah untuk stay aktif. Policy `local_night` tidak tersedia pada versi ini. Deposit adalah liabilitas sampai diaplikasikan ke invoice/refund; deposit tidak dihitung revenue saat diterima.
 
 ### 024.6 Shift kas, payment, dan rekonsiliasi
 
@@ -1672,3 +1778,241 @@ Konvensi command: `create` membuat draft/intent; `submit` mengunci draft dan mem
 ### 027.14 Acceptance test kontrak modul
 
 Setiap modul wajib memiliki test positif, negatif, concurrency dan recovery: aksi berpermission berhasil; aksi role/cabang lain ditolak; input invalid tidak meninggalkan side effect; retry idempotent; stale version mendapat conflict; audit dan outbox tepat; downstream failure dapat dilihat/dilanjutkan; reversal mempertahankan histori. UAT menandatangani fungsi utama per role, bukan hanya screenshot halaman.
+
+---
+
+## PETORA-FINAL-028 - Kamus Skema Domain Pendukung
+
+Bagian ini menetapkan field inti untuk tabel domain yang belum dirinci di `PETORA-FINAL-003`. Semua FK mengikuti organisasi/cabang parent, semua nominal menggunakan IDR integer, semua timestamp UTC, dan semua status memakai allowlist dengan transition function. Kolom audit umum mengikuti 023.1 kecuali tabel append-only.
+
+### 028.1 Klinik, resep, farmasi, lab, dan rawat inap
+
+| Tabel                | Kolom inti dan batasan                                                                                                                                                                                                                                                                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `prescriptions`      | `id`, organization/branch, `medical_record_id`, `prescription_number`, `prescriber_employee_id`, pet/customer, `status` (`active`,`partially_dispensed`,`dispensed`,`cancelled`,`expired`), `issued_at`, `valid_until`, `refills_allowed`, `refills_used`, instruction snapshot, signature reference. Hanya dari encounter final; unique nomor per cabang. |
+| `prescription_items` | `id`, prescription, line no, product, product/name/strength snapshot, `dose_value numeric`, `dose_unit`, `route`, `frequency_code`, `duration_days`, `quantity_prescribed numeric(18,4)`, `quantity_dispensed` projection, refillable flag, directions; check dose/qty positive dan product requires prescription.                                         |
+| `dispensations`      | `id`, prescription, branch, pharmacist user/employee, `status` (`posted`,`reversed`), dispensed_at, counseling/label version, sales transaction/item nullable, actor; dispense hanya final setelah stock/payment policy valid.                                                                                                                             |
+| `dispensation_items` | `id`, dispensation, prescription item, `inventory_lot_id`, quantity, unit snapshot, expiry snapshot, stock movement ID, label instruction snapshot; unique per prescription item/lot/dispensation.                                                                                                                                                         |
+| `lab_orders`         | `id`, medical record, branch, order number, requested_by, lab/test catalog ref, priority, specimen type, collection status/time/actor, `status` (`ordered`,`collected`,`processing`,`resulted`,`verified`,`cancelled`), due_at, cancellation reason.                                                                                                       |
+| `lab_results`        | `id`, lab order, version, result schema/value, unit, reference range snapshot, abnormal flag, method, attachment IDs, entered_by, `verified_by`, verified_at, released_at; result edits create new version; only verified result can be released.                                                                                                          |
+| `surgery_cases`      | `id`, medical record, case number, procedure, planned/actual times, surgeon, team snapshot, anesthesia plan/record, consent document, preop checklist, status (`planned`,`consented`,`preop_checked`,`in_progress`,`recovery`,`completed`,`cancelled`), outcome/complication.                                                                              |
+| `hospital_stays`     | `id`, pet/medical record/branch, ward/cage resource, admission/discharge times, admitting/discharging veterinarian, status (`admitted`,`active`,`discharge_pending`,`discharged`,`cancelled`), care plan snapshot, responsible customer; medication and observation live in append-only care log.                                                          |
+| `clinical_care_logs` | `id`, stay/session, event type, occurred_at server, author, observation/measurement schema, medication administration reference, incident severity, attachment IDs, customer_share_state; edits use correction event, not overwrite.                                                                                                                       |
+
+Clinical free text remains private by default. Structured payloads carry `schema_version`; required values depend on encounter type. Customer-shared outputs are explicit rows (`medical_record_shares`) referencing exact record/result/version, recipient and expiry, not a global pet-level flag.
+
+### 028.2 Membership, loyalty, promotion, voucher, CRM
+
+| Tabel                                       | Kolom inti dan batasan                                                                                                                                                                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `membership_tiers`                          | `id`, organization, code, name, effective dates, minimum eligible spend, point multiplier, benefits schema/version, priority, active; tier code unique per organization/version.                                                                             |
+| `customer_memberships`                      | `id`, customer, tier, status (`active`,`paused`,`expired`,`cancelled`), start/end, qualification period, qualifying spend snapshot, source, approved_by; one active membership per program/customer.                                                         |
+| `loyalty_ledger`                            | `id`, customer, branch nullable, event type (`earn`,`redeem`,`expire`,`reversal`,`adjustment`), signed `points_delta bigint`, source transaction/item, original ledger ref, expiry_at, rule version, actor/reason; unique source event/dedup key; immutable. |
+| `promotions`                                | `id`, organization, code/name, type, priority, `status` (`draft`,`scheduled`,`active`,`paused`,`ended`,`archived`), start/end, timezone, eligible channels/branches, stacking policy version, created/approved actors.                                       |
+| `promotion_rule_versions`                   | promotion, version, JSON schema-validated conditions/effects, eligible categories/products/services/tier, minimum spend, discount cap, max uses, per-customer cap, effective range, authored/approved actor; published versions immutable.                   |
+| `vouchers`                                  | `id`, promotion/version, code hash, customer nullable, issued_at, valid range, max uses, status; raw single-use code shown once only; unique keyed hash.                                                                                                     |
+| `promotion_redemptions`                     | `id`, voucher/promotion version, customer, transaction, status (`reserved`,`redeemed`,`released`,`reversed`), discount snapshot, reserved/committed/released timestamps, idempotency key; quota locked atomically.                                           |
+| `customer_segments` / `segment_memberships` | Segment version/rule schema, evaluation time, customer, inclusion/exclusion reason; segment materialization is rebuildable and cannot override consent/privacy policy.                                                                                       |
+| `complaint_tickets`                         | `id`, branch, customer, pet nullable, source, category, priority, status, SLA due, assignee, subject, resolution code, opened/resolved/closed times; message content is separate from internal notes.                                                        |
+
+### 028.3 SDM, finance, AR/AP, budget, aset
+
+| Tabel                     | Kolom inti dan batasan                                                                                                                                                                                          |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `employee_schedules`      | `id`, employee, branch, local date/timezone snapshot, start/end UTC, role/resource, status (`draft`,`published`,`cancelled`), published_by; overlap rules enforced per employee/resource.                       |
+| `leave_requests`          | `id`, employee, leave type, date range, hours, reason, status (`requested`,`approved`,`rejected`,`cancelled`), approver/time; actor tidak menyetujui permintaan sendiri.                                        |
+| `commission_rules`        | `id`, effective range, branch/employee/service/product/category selectors, calculation type/rate/fixed amount, basis code, cap, status, approved_by; specificity order explicit and versioned.                  |
+| `commission_entries`      | `id`, employee, source transaction/item/service, basis amount snapshot, rate/formula version, amount, status (`pending`,`approved`,`paid`,`reversed`), payroll line ref; source unique to avoid duplicates.     |
+| `accounting_periods`      | `id`, organization, fiscal year, start/end date, status (`open`,`closing`,`closed`,`reopened`), closed_by/time, reopen reason/approval; date ranges cannot overlap.                                             |
+| `chart_of_accounts`       | `id`, org, code, name, account type, parent, normal balance, postable, active, tax/cash flags; unique code; parent must same org and no hierarchy cycle.                                                        |
+| `journal_entries`         | `id`, org/branch, number/date/period, source type/id/version, description, status (`draft`,`posted`,`reversed`), totals, posted_by/time, reversal_of, approval refs; source and reversal unique as appropriate. |
+| `journal_lines`           | `id`, journal, line no, account, branch, description, debit/credit bigint, source dimensions; exactly one positive side; posted journal immutable.                                                              |
+| `receivables`             | `id`, customer, branch, source transaction, issue/due date, original/open amount, status, terms snapshot; open amount derived from allocations/credit notes and reconciled.                                     |
+| `payables`                | `id`, supplier, branch, supplier bill, issue/due date, original/open amount, PO/receipt match status, status; duplicate supplier invoice number flagged/blocked per supplier.                                   |
+| `payment_allocations`     | `id`, payment, receivable/payable target, amount bigint>0, allocated_at/by; sum allocations cannot exceed payment or open balance.                                                                              |
+| `cash_accounts`           | `id`, organization/branch, account/COA ref, code/name, currency IDR, register/bank type, opening balance snapshot, active; movement ledger is source of current balance.                                        |
+| `budget_lines`            | `id`, budget, account/cost center, approved amount, committed amount, actual projection, warning/stop threshold; actual derives from posted journal, not manually editable.                                     |
+| `assets` / `asset_events` | Asset tag/category, serial, acquired date/cost, useful life/salvage, location/custodian, status; events acquire/transfer/maintain/depreciate/dispose reference approval and journal.                            |
+
+### 028.4 Notifikasi, template, integrasi, webhook, dan audit
+
+| Tabel                             | Kolom inti dan batasan                                                                                                                                                                                                                                            |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `message_templates`               | `id`, code/channel/locale, version, subject/body, approved status, variable schema/allowlist, purpose, updated_by; template compiled safely, no arbitrary HTML/script.                                                                                            |
+| `notifications`                   | `id`, organization/branch, recipient type/id, purpose, channel, template/version, source event, status (`queued`,`suppressed`,`sending`,`sent`,`delivered`,`read`,`failed`,`cancelled`), scheduled_at, consent snapshot, provider message ref; dedupe key unique. |
+| `notification_attempts`           | `id`, notification, attempt number, started/finished, provider code, request hash, response code, redacted error, next retry; raw body/secret/token disallowed.                                                                                                   |
+| `integration_accounts`            | `id`, provider/capability/scope, status (`configured`,`tested`,`active`,`degraded`,`disabled`), sandbox/live, secret reference, credential version, last test/result, created/updated actor; no plaintext credential columns.                                     |
+| `provider_webhook_events`         | provider, provider event ID, event type, received_at, signature_valid, payload_hash, minimal encrypted payload ref, processing status, processed_at, error code; unique `(provider,event_id)`, replay safe.                                                       |
+| `outbox_events`                   | event ID, schema version, aggregate type/id/version, event type, minimal payload, dedupe key, status, available_at, lease owner/until, attempt count, last error code, created/completed time; inserted with source transaction.                                  |
+| `job_runs`                        | job code, scheduled window, started/finished, status, claimed batch size, success/failure counts, cursor/checkpoint, request/correlation ID, redacted error; unique job+window for singleton periodic jobs.                                                       |
+| `audit_logs`                      | actor, role snapshot, action, resource, record ID, branch, request ID, before/after allowlisted diff, reason, source IP/user-agent policy, timestamp; append-only with retention control.                                                                         |
+| `documents` / `document_versions` | owner type/id, category, private bucket/path, MIME/size/checksum, classification, retention_until, expiry, version, uploaded_by, scan status; metadata RLS is authoritative for signed URL issuance.                                                              |
+
+### 028.5 Constraint lintas data pendukung
+
+- Prescription, dispensation, journal, payment allocation, loyalty, commission, notification, webhook, outbox dan audit facts tidak cascade-delete dan tidak menerima update dari role aplikasi setelah final.
+- JSONB dibatasi oleh Zod di Edge Function dan PostgreSQL `CHECK`/version field untuk payload yang memengaruhi workflow; tidak menggunakan JSONB sebagai pengganti FK, angka agregat, atau status utama.
+- Semua tabel dengan customer/user/staff sensitif mendapat RLS berbeda untuk `read` dan `read_sensitive`; signed URL hanya diterbitkan melalui function yang mengecek row, parent, purpose, branch dan expiry.
+- Index unik idempotency/provider event/source refs menjaga at-most-once effect pada setiap consumer, sedangkan worker delivery tetap at-least-once.
+- Projection `open_amount`, saldo loyalty, stok, dashboard dan segment member harus dapat direkonsiliasi dari ledger/source records dan memiliki prosedur rebuild yang aman.
+
+---
+
+## PETORA-FINAL-029 - Kontrak Integrasi dan Notifikasi
+
+### 029.1 Bentuk adapter dan capability
+
+Setiap integrasi diimplementasikan sebagai adapter server-side dengan kontrak `validateConfig`, `testConnection`, capability-specific `execute`, `verifyWebhook`, `normalizeWebhook`, `reconcile`, dan `health`. Registry memetakan provider ke capability dan schema config; adapter tidak boleh memilih endpoint arbitrer dari input admin.
+
+| Capability        | Command adapter                                                            | Hasil yang disimpan PETORA                              | Batas sumber kebenaran                                               |
+| ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------- |
+| Email             | `send`, `test`, `verifyWebhook` bila provider mendukung                    | message ref, queued/sent/delivered/bounced, timestamp   | status provider hanya delivery, bukan status bisnis                  |
+| WhatsApp          | `sendTemplate`, `test`, delivery webhook                                   | provider ref, template/version, delivery status         | hanya template approved dan kontak consented                         |
+| Payment           | `createIntent`, `getStatus`, `refund`, `verifyWebhook`, `settlementReport` | intent/refund IDs, amount, currency, status, event ID   | payment baru settled dari respons server/provider terverifikasi      |
+| Shipping          | `quote`, `createShipment`, `cancelShipment`, `track`, `verifyPOD`          | quote/waybill, status, charges, event history           | status order internal tetap dikendalikan workflow PETORA             |
+| Accounting export | `exportBatch`, `acknowledge`, `reconcile`                                  | batch ID, period, record hashes, accepted/rejected rows | jurnal PETORA sumber; export eksternal tidak mengubah posted journal |
+| Backup storage    | `writeObject`, `verifyChecksum`, `listRetention`, `restoreRead`            | object ref, checksum, retention, verification result    | backup dianggap valid hanya setelah restore test                     |
+
+### 029.2 Lifecycle request, timeout, retry
+
+Setiap external call mempunyai `integration_request_id`, event/source ID, idempotency key provider bila ada, connect/read timeout, maximum payload dan redacted trace. Default timeout 10 detik untuk API sinkron dan worker asynchronous untuk operation lama. Retry hanya untuk timeout/network/HTTP `429`/`5xx`, exponential backoff dengan jitter dan maksimum 8 percobaan dalam 24 jam; `4xx` validation/auth berhenti dan meminta koreksi credential/config. Setelah batas, status `dead_letter` dan alert admin.
+
+Exactly-once tidak dijanjikan pada network call. PETORA memakai at-least-once delivery dan dedupe provider key/source event; bila provider tidak mendukung idempotency, adapter harus melakukan status lookup sebelum resend. Operasi `refund`, `createShipment`, dan `createPaymentIntent` tidak boleh dikirim ulang tanpa dedupe/lookup karena dapat menggandakan efek eksternal.
+
+### 029.3 Payment intent dan webhook sequence
+
+1. `sales-preview` menghasilkan quote yang expiry-nya pendek; `sales-create` memilih `sales_create_settled_atomic` atau `sales_create_pending_atomic` berdasarkan route/mode payment yang telah diuji.
+2. Hanya jalur pending yang membuat provider intent asynchronous dan menyimpan reservation TTL. Adapter mengirim amount/currency/order ref dengan idempotency key stabil dan menyimpan provider response minimal. UI boleh redirect/menampilkan QR, tetapi return URL bukan bukti pembayaran.
+3. Webhook masuk ke `provider_webhook_events`, signature/timestamp/replay divalidasi, provider event ID di-dedupe, response HTTP cepat setelah event persist.
+4. Worker mengambil status provider dengan credential server, mencocokkan order ref, amount, currency dan status; mismatch menjadi exception/manual review, tidak settle otomatis.
+5. Payment transition final diproses oleh `payment_settle_atomic` setelah event provider terverifikasi; function tersebut mengunci reservation, memvalidasi amount/currency/order ref, lalu menyelesaikan stock/loyalty/journal sekali dengan event dedupe. Sale completion hanya terjadi saat seluruh tender yang diwajibkan settled.
+6. Refund dibuat sebagai refund request internal; adapter refund memakai key baru yang stabil per refund ID. Status `succeeded` hanya setelah bukti provider, sementara timeout tetap `pending_unknown` sampai status query/reconciliation.
+
+### 029.4 Notifikasi, consent, dan template
+
+Event bisnis menambah notification job dengan recipient, tujuan, channel, locale, template version, consent snapshot dan dedupe key. Saat dispatch, consent diperiksa ulang; jika revoked/status tidak jelas, status menjadi `suppressed`. Marketing, transaksi/service, medical sharing, dan internal alert adalah purpose berbeda dan tidak berbagi consent.
+
+Template variables memakai allowlist per event (mis. `customer.first_name`, `pet.name`, `booking.local_date`, `branch.name`, `transaction.number`, `transaction.total`). Renderer meng-escape value, menolak variable tidak dikenal, membatasi ukuran, serta melarang raw clinical notes, diagnosis, resep, salary, auth link/token atau data pembayaran sensitif di pesan. Medical result dikirim sebagai secure portal link dengan signed URL/authorization, bukan attachment publik.
+
+Fallback channel hanya berjalan bila purpose consent mengizinkan dan channel fallback telah dipilih customer; jangan mengirim WhatsApp lalu email tanpa aturan consent. Batas frekuensi default 3 marketing messages per 7 hari per customer/channel dan dapat dibuat lebih ketat; service reminders tidak dihitung marketing tetapi tetap harus mematuhi consent dan preference. STOP/unsubscribe/provider suppression diproses segera dan berlaku untuk campaign queued.
+
+### 029.5 Konfigurasi provider dan credential lifecycle
+
+Panel integration menyimpan provider code, capability, branch scope, environment, status, config schema version, secret reference, credential version, last successful test dan health. Credentials ditulis/rotate satu kali melalui TLS ke secret store, masked saat tampil, dan tidak bisa read-back. Enable memerlukan `testConnection` success; production dan sandbox secret/endpoint terpisah. Credential rotate: create new version -> test -> switch active version -> monitor -> revoke old version; kegagalan test mempertahankan credential aktif lama.
+
+Provider host, callback IP/signature, redirect domains dan allowed scopes berasal dari adapter allowlist. Admin tidak dapat memasukkan arbitrary URL, file, script, SMTP command, webhook destination atau provider package; mitigasi SSRF mencakup DNS/private IP block, redirect validation dan egress policy.
+
+### 029.6 Rekonsiliasi, outage, dan acceptance
+
+Reconciliation job membandingkan payment/refund/settlement/shipping/export/backup refs berdasarkan window dan external event ID; setiap mismatch membuat exception dengan assigned owner, monetary exposure, source links dan resolution code. Retry tidak menghapus error awal. Provider outage menonaktifkan capability terdampak atau menandainya degraded; proses internal yang aman tetap tersedia, payment pending tidak boleh dianggap lunas, dan manual process harus masuk ledger/reconcile sebelum close.
+
+Acceptance minimum: webhook invalid/replay/out-of-order; provider slow/timeout/429/5xx/4xx; duplicate request; secret rotate; consent revoke saat antrean; malformed template variable; provider amount mismatch; refund timeout lalu reconcile; egress/SSRF attempt ditolak; backup checksum mismatch dan restore failure. Semua test memastikan secret dan PII tidak muncul di log, UI response, analytics, atau error tracker.
+
+---
+
+## PETORA-FINAL-030 - Onboarding, Import, Export, dan Privasi
+
+### 030.1 Batch import data
+
+Import dilakukan melalui admin wizard/job, bukan insert langsung ke tabel produksi. Tiap batch mencatat `import_batch_id`, tipe data, source filename/hash, mapping template/version, uploader, cabang/organisasi, jumlah baris, waktu, status dan approval. File disimpan private dan dihapus sesuai retensi sementara setelah batch selesai.
+
+Status batch: `draft -> uploaded -> scanning -> validating -> ready -> committing -> committed`; alternatif terminal `rejected`, `cancelled`, `committed_with_rejections`, atau `reversed`. Tidak ada commit sebelum scan/format/security validation dan preview disetujui. Row error berisi nomor baris, kolom, stable error code, pesan, dan severity; response tidak memuat nilai PII penuh.
+
+**Template dan kolom wajib:**
+
+| Import type        | Kolom minimum                                                                                                              | Aturan unique/matching                                                                                                                          |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product master     | `sku`, `name`, `category_code`, `unit_code`, `tax_category_code`, `sellable`, `purchasable`, `track_batch`, `track_expiry` | SKU unique organisasi; barcode duplicate jadi hard error kecuali mapping alias disetujui. Harga cabang berada di file terpisah/effective-dated. |
+| Customer           | `external_ref`, `display_name`, `phone` atau `email`, `consent_status`, `consent_source`                                   | exact normalized matching menghasilkan candidate, tidak auto-merge; consent harus memiliki source/version.                                      |
+| Pet/owner          | `pet_external_ref`, `owner_external_ref`, `name`, `species_code`, `relationship`, optional DOB/sex/breed                   | owner/customer harus sudah ada atau disertakan dependency; minimal satu owner valid per pet.                                                    |
+| Supplier           | `supplier_code`, `name`, `contact`, payment terms                                                                          | supplier code unique organisasi; bank detail di-import terpisah dengan permission sensitive dan approval.                                       |
+| Employee           | `employee_number`, `full_name`, `position_code`, `branch_code`, `join_date`, `employment_type`, `status`                   | profile/email invitation terpisah; gaji/ID/bank menggunakan secure sensitive import dan dual approval.                                          |
+| Opening stock      | `branch_code`, `warehouse_code`, `sku`, `batch`, `expiry_date`, `quantity_base`, `unit_cost_idr`, `counted_at`             | SKU/warehouse/unit harus ada; lot required sesuai product flags; negative/expired opening ditolak atau dikarantina dengan approval.             |
+| Opening AR/AP      | `party_code`, `document_number`, `issue_date`, `due_date`, `original_amount_idr`, `open_amount_idr`, `source_ref`          | `0 <= open_amount <= original_amount`; source document duplicate diblokir; detail alokasi tersedia untuk audit.                                 |
+| Opening GL balance | `period`, `account_code`, `branch_code`, `debit_idr`, `credit_idr`, `source_ref`                                           | period harus opening/open; debit=credit satu batch; akun dan cabang valid; inventory opening tidak digandakan di GL tanpa reconciliation.       |
+
+### 030.2 Validasi, staging, dan commit
+
+1. Upload cek ukuran, MIME, encoding UTF-8, struktur kolom, malware scan bila tersedia, dan checksum. File spreadsheet formulas/macros tidak dieksekusi.
+2. Mapping kolom ke schema disimpan versioned; required fields, enum/code references, format tanggal `YYYY-MM-DD`, decimals, contact normalization, unique constraints dan branch scope diperiksa.
+3. Preview menampilkan valid/error/warning counts, contoh baris tersamarkan, total kuantitas/nilai, duplicate candidates, impact dan approver. User dapat mengunduh error report tanpa data sensitif tidak perlu.
+4. Commit memproses dependency order: organization/reference -> branch/warehouse/account/product/service -> supplier/customer/pet/employee -> stock/AR/AP/GL opening. Tipe data diproses dengan idempotency key per batch+row external ref.
+5. Commit besar memakai chunk transaction dengan checkpoint dan status per row; opening balance ledger mempunyai satu batch approval dan tidak boleh dianggap lengkap sebelum seluruh batch category reconcile. Restart job melanjutkan checkpoint, bukan mengulang row committed.
+6. Import tidak boleh membuat fake sales/medical records. Stock opening menghasilkan `opening_balance_in` movement sesuai allowlist canonical 003.9; AR/AP/opening GL punya source batch refs dan jurnal opening yang seimbang. Historical transaction import merupakan proyek migrasi tersendiri, dengan mapping, reconciliation, legal review dan sign-off sebelum commit.
+7. Cancel hanya sebelum commit. Koreksi committed import membuat reversal batch/source movements dan batch pengganti; tidak menghapus data untuk membuat ulang.
+
+### 030.3 Export data
+
+Export harus memakai report/export job dengan permission `export` domain, scope cabang, filter/rentang tanggal, field allowlist, row cap atau asynchronous delivery, audit actor/request/row count, dan signed URL expiry. CSV memakai UTF-8, header stabil, delimiter/comma quoting, tanggal ISO, decimal tanpa localized separator, currency field eksplisit; PDF adalah presentasi bukan format rekonsiliasi. File export sensitif dienkripsi di storage, akses satu kali/expiry configurable, tidak masuk public CDN, dan job dihapus setelah retention period.
+
+Export manifest menyertakan blueprint/schema version, report code, filter efektif, timezone, `as_of`, generation time, checksum, record count dan definisi total. Export finansial disediakan oleh finance reports; export klinis memerlukan `report:clinical:read` dan tidak menyertakan internal notes secara default. Download selalu melalui signed URL yang diverifikasi server-side dan dicatat audit.
+
+### 030.4 Permintaan akses, koreksi, penghapusan, dan anonimisasi
+
+Data request dicatat sebagai ticket `received -> identity_verification -> scope_review -> approved/rejected -> executing -> completed`, dengan requester type, lawful/purpose basis yang ditinjau organisasi, due date, reviewer dan bukti penyelesaian. Customer identity harus diverifikasi melalui kanal terdaftar; request tidak boleh mengembalikan data customer lain atau co-owner di luar izin.
+
+Koreksi profil dilakukan melalui domain workflow dan audit; transaksi, jurnal, medical record final, stock ledger dan payment evidence tidak diubah. Penghapusan customer berarti memutus login/marketing dan menganonimkan field yang tidak wajib dipertahankan, hanya setelah mengecek transaksi/medical/legal hold. Relasi FK dan snapshot historis dipertahankan dengan identifier pseudonymous. Medical/financial records yang wajib dipertahankan tidak dihapus karena customer menutup akun.
+
+Retensi per kategori (`customer_contact`, marketing consent, financial, clinical, HR, audit, attachment, webhook payload, export file, integration logs) mempunyai `retention_policy_code`, `retention_until`, legal hold flag/reason, owner dan disposal action. Durasi final ditetapkan pemilik legal/finance/medical sesuai regulasi berlaku; production activation diblokir bila kategori yang diwajibkan belum memiliki policy. Job purge hanya memproses eligible records, memverifikasi legal hold, mencatat jumlah/hash/job actor, menghapus object storage dan DB metadata sesuai urutan, serta mendukung bukti completion tanpa menyimpan konten yang sudah dihapus.
+
+### 030.5 Migrasi dan cutover
+
+Sebelum cutover: source-of-truth per data disepakati, mapping codes/units/tax/branch disetujui, duplikasi ditangani, jumlah/nilai sumber dicatat, checksum file disimpan, dry-run dilakukan pada staging. Cutover mencatat freeze time, delta import, opening stock/cash/AR/AP/GL, unresolved rows, owner approval dan reconciliation totals. Go-live tidak dilakukan jika trial balance tidak seimbang, jumlah opening stock tidak cocok, atau critical customer/employee mapping belum valid.
+
+---
+
+## PETORA-FINAL-031 - Rekonsiliasi dan Runbook Operasional
+
+### 031.1 Rekonsiliasi terjadwal
+
+Setiap reconciliation run menyimpan `run_id`, scope/time window, source snapshot, query/version, totals, variance, tolerance, detail exception, actor/job, started/finished, status dan resolution. Hasil `pass`, `pass_with_tolerance`, `needs_review`, atau `failed`; toleransi tidak menyembunyikan variance dan membutuhkan alasan/approval.
+
+| Kontrol                                 | Jadwal default                     | Rekonsiliasi                                                                            | Owner exception                |
+| --------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------ |
+| Inventory projection vs movement ledger | per malam dan pasca-import         | saldo per product/warehouse/lot = movement sum + opening; reserved = active reservation | inventory manager              |
+| Sales vs payment vs cash shift          | per shift dan harian               | total tender, cash expected, refund pending, gateway settlement refs                    | cashier supervisor/finance     |
+| Journal vs operational sources          | per malam dan sebelum period close | source final punya posting tepat sekali; debit=credit; mapping account valid            | finance controller             |
+| AR/AP vs allocation ledger              | harian dan period close            | open balance = source amount - credits - allocations; due bucket konsisten              | finance                        |
+| Loyalty balance vs ledger               | per malam                          | point projection = eligible nonexpired ledger; overdraw diselidiki                      | loyalty/customer service owner |
+| Voucher quota vs redemptions            | real-time dan harian               | reserved + redeemed tidak melebihi max uses; expired reservations dilepas               | marketing owner                |
+| Booking capacity vs reservations        | real-time dan tiap jam             | slot aktif resource tidak overlap/overcapacity                                          | branch operations              |
+| Outbox/webhook/job backlog              | tiap 5 menit                       | pending age, retries, dead letters, unmatched provider events                           | integration owner              |
+| Storage metadata vs object inventory    | harian                             | missing objects, orphan files, checksum/retention                                       | platform admin                 |
+
+Rebuild projection dilakukan dalam shadow table/scope, dibandingkan checksum/totals dengan projection aktif, lalu swap atomically dengan lock/version. Dilarang truncate projection aktif sebelum rebuild tervalidasi. Reconciliation source records bersifat read-only; koreksi dibuat sebagai adjustment/reversal yang merujuk exception ID.
+
+### 031.2 Exception queue dan penyelesaian
+
+Setiap exception mempunyai severity (`info`,`warning`,`major`,`critical`), domain, branch, detected_at, source IDs, monetary/data impact, assigned role/user, due time, resolution code, notes, attachments, state (`open`,`investigating`,`waiting_external`,`resolved`,`accepted_risk`,`reopened`). Critical finansial/security menahan period close atau capability terkait sesuai policy; cosmetic delivery error tidak menghentikan transaksi sumber.
+
+Resolusi wajib memilih tindakan yang eksplisit: retry idempotent, reverse/correct, reconcile manually with evidence, suppress/cancel, provider escalation, atau accepted risk dengan approver dan expiry review. Menutup exception tidak menghapus original payload/hash/error. Retry manual selalu membuat attempt baru dan memeriksa dedupe/source status.
+
+### 031.3 Severity, respons, dan eskalasi
+
+| Severity | Contoh                                                                                    | Respons awal                                                        | Eskalasi                                                                          |
+| -------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `SEV-1`  | dugaan kebocoran data, payment ganda massal, inventory/GL corruption, aplikasi utama down | on-call segera, hentikan fitur terdampak, pertahankan bukti         | incident commander + owner bisnis + platform/security; update stakeholder berkala |
+| `SEV-2`  | payment provider gagal luas, transaksi kritis stuck, cabang tidak bisa POS, backup miss   | triage segera pada jam operasi, aktifkan prosedur manual terkontrol | domain owner dan platform; update setiap 30 menit sampai stabil                   |
+| `SEV-3`  | satu integrasi/fitur nonkritis degraded, report/export tertunda                           | ticket dalam 1 hari kerja                                           | owner modul; workaround dan target fix tercatat                                   |
+| `SEV-4`  | pertanyaan penggunaan, defect cosmetic, request akses biasa                               | antrean support normal                                              | service desk; SLA menurut config layanan                                          |
+
+Respons selalu membedakan containment, diagnosis, recovery, rekonsiliasi dan post-incident review. Jangan menyebut insiden selesai hanya karena deploy/restart; bukti saldo, payment, stock, journal dan queue harus cocok.
+
+### 031.4 Runbook operasional wajib
+
+- **Payment stuck/duplicate:** disable provider capability bila perlu -> cari transaksi/payment intent/refund IDs -> query provider status -> jangan retry create/refund dengan key baru -> tandai settled hanya berdasar bukti -> reconcile clearing/cash/AR -> audit resolution.
+- **Stock discrepancy:** hentikan adjustment manual -> bandingkan lot movement ledger, reservations, receipts, sales/dispensations, transfers -> ambil count independen -> approve adjustment/reversal -> rerun inventory reconciliation.
+- **Outbox dead letter:** klasifikasikan schema/config/provider/recipient error -> cek consent dan dedupe status -> perbaiki konfigurasi atau map event -> retry satu batch terukur -> pastikan tidak ada duplicate external message.
+- **Medical disclosure:** revoke signed URL/share -> preserve access logs -> disable affected export/share capability -> notify privacy/clinical owner sesuai kebijakan -> review recipients and retention -> create audited corrective action.
+- **Credential compromise:** disable/rotate credential/provider webhook secret -> revoke sessions/token terkait -> verify scopes and last usage -> audit events -> test new credential in sandbox -> enable and monitor.
+- **Restore/DR:** incident commander menetapkan RPO, target project, restore point -> restore DB dan storage terisolasi -> verify migrations/RLS/functions, counts/checksums and sample workflows -> approve cutover -> freeze writes or replay event log -> post-restore reconciliation.
+
+### 031.5 Penutupan operasional cabang
+
+Closing checklist tidak sekadar mengakhiri shift: tutup register sesuai policy, rekonsiliasi denomination/cash, review payment pending/refund, pastikan POS draft tidak dianggap sale, cek booking/stay/pasien rawat inap yang belum handover, stock receiving/transit/expiry alert, approval queue, customer complaint SLA, dan outbox cabang. Hasil checklist mencatat actor, waktu server, variance, unresolved item dan penerima shift berikutnya. Cabang dapat tetap open dengan exception hanya bila kategori tersebut diizinkan dan manager memberi sign-off eksplisit.
+
+---
+
+## Penetapan Akhir
+
+`PETORA-FINAL-BLUEPRINT-000` adalah spesifikasi normatif produk dan deployment PETORA. Pengembangan harus mengikuti keputusan dan invariant di atas. Pengecualian hanya boleh dilakukan melalui keputusan perubahan terdokumentasi yang memperbarui bagian, requirement, database, API, UI, test dan prosedur operasi terkait. Spesifikasi ini menetapkan target readiness; implementasi tetap harus memenuhi seluruh acceptance gate sebelum dinyatakan siap produksi.
